@@ -24,14 +24,24 @@ public class Scene: SKScene, GameDelegate {
     
     private var sceneState: SceneState!
     private var game: Game!
-
+    
     private var isGameRunning = false
     private var lastUpdateTime: NSTimeInterval = 0.0
     private var dt: NSTimeInterval = 0.0
     
     private var backgroundNode: BackgroundNode!
+    private var borderNode: OvalBorderNode!
+    private var objectsNode: SKNode!
+    private var rotationNode: SKNode!
+    
+    private var cannonNode: CannonNode!
+    private var targetNode: SKSpriteNode!
+    private var bulletNodes: Set<BulletNode>!
+    private var currentPatternNodes: [TargetNode] = []
     
     private let sizes = Values.sharedValues.sizes
+    private let positions = Values.sharedValues.positions
+    private let speeds = Values.sharedValues.speeds
     
     public override func didMoveToView(view: SKView) {
         game = Game()
@@ -44,19 +54,33 @@ public class Scene: SKScene, GameDelegate {
     
     public func gameDidStart() {
         isGameRunning = true
+        
+        let pattern = createPatternForStage(game.stage)
+        loadPattern(pattern)
     }
     
     public func gameDidEnd(score: Int) {
         isGameRunning = false
         
         // remove entities etc from ui
+        objectsNode.removeFromParent()
+        
         saveScore(score)
         
         playingNode?.close(withTargetState: .GameOver)
     }
     
+    public func gameDidProceedToStage(stage: Int) {
+        let pattern = createPatternForStage(stage)
+        loadPattern(pattern)
+    }
+    
     public func gameDidScore(newScore: Int) {
-        // forward score to playingnode
+        playingNode?.updateScoreLabel(withScore: newScore)
+    }
+    
+    public func gameDidChangeAmountOfBullets(byAmount: Int, totalAmount: Int) {
+        playingNode?.updateBulletsLabel(withBullets: totalAmount)
     }
     
     private func initBackgroundNode() {
@@ -66,9 +90,90 @@ public class Scene: SKScene, GameDelegate {
     }
     
     public func startNewGame() {
-        // init ui stuff
+        initObjectsNode()
+        initBorderNode()
+        initRotationNode()
+        initCannonNode()
+        bulletNodes = []
+        
+        initPhysics()
         
         game.startNewGame()
+    }
+    
+    private func initObjectsNode() {
+        objectsNode = SKNode()
+        addChild(objectsNode)
+    }
+    
+    private func initBorderNode() {
+        borderNode = OvalBorderNode(diameter: sizes.BorderDiameter, strokeWidth: sizes.BorderStrokeWidth)
+        borderNode.position = positions.OvalBorderNode
+        objectsNode.addChild(borderNode)
+    }
+    
+    private func initRotationNode() {
+        rotationNode = SKNode()
+        rotationNode.position = positions.ScreenMiddle
+        objectsNode.addChild(rotationNode)
+    }
+    
+    private func initCannonNode() {
+        cannonNode = CannonNode()
+        cannonNode.position = positions.Cannon
+        objectsNode.addChild(cannonNode)
+    }
+    
+    private func initPhysics() {
+        physicsWorld.gravity = CGVectorMake(0.0, 0.0)
+        physicsWorld.contactDelegate = self
+    }
+    
+    private func createTargetNode(degrees: CGFloat, rotation: CGFloat) -> TargetNode {
+        let target = Target(degrees: degrees, rotation: rotation)
+        return TargetNode(target: target, thickness: sizes.TargetThickness, inRectWithDiameter: sizes.PlayingAreaDiameter)
+    }
+    
+    private func createTargetNodes(pattern: TargetPattern) -> [TargetNode] {
+        var targetNodes = [TargetNode]()
+        for i in 0..<pattern.count {
+            let targetNode = createTargetNode(pattern.targetSize, rotation: pattern.targets[i].rotation)
+            targetNode.alpha = 0.0
+            rotationNode.addChild(targetNode)
+            targetNodes.append(targetNode)
+        }
+        return targetNodes
+    }
+    
+    private func createPatternForStage(stage: Int) -> TargetPattern {
+        return TargetPattern(targetCount: stage + 9, gap: 5.0)
+    }
+    
+    private func loadPattern(pattern: TargetPattern) {
+        currentPatternNodes = createTargetNodes(pattern)
+        
+        let waitTime = 0.05
+        for (index, arc) in currentPatternNodes.enumerate() {
+            let wait = SKAction.waitForDuration(waitTime * Double(index))
+            let fadeIn = SKAction.fadeAlphaTo(1.0, duration: ActionDuration)
+            arc.runAction(SKAction.sequence([wait, fadeIn]))
+        }
+        
+        let totalWait = SKAction.waitForDuration(waitTime * Double(currentPatternNodes.count + 1))
+        runAction(SKAction.sequence([totalWait, SKAction.runBlock({ () -> Void in
+            self.currentPatternNodes.forEach { $0.shouldRotate = true }
+        })]))
+    }
+    
+    private func shootBullet() {
+        if game.bullets > 0 {
+            game.shootBullet()
+            
+            let bulletNode = BulletNode()
+            bulletNode.position = positions.ScreenMiddle
+            objectsNode.addChild(bulletNode)
+            bulletNodes.insert(bulletNode)
+        }
     }
     
     public override func update(currentTime: NSTimeInterval) {
@@ -84,12 +189,38 @@ public class Scene: SKScene, GameDelegate {
         guard isGameRunning else { return }
         
         game.tick(dt)
+        moveBullets(dt)
+        rotateTargetNodes()
+    }
+    
+    private func moveBullets(dt: NSTimeInterval) {
+        for bullet in bulletNodes {
+            bullet.moveBy(CGPoint(x: 0, y: speeds.Bullet), dt: dt)
+            
+            if bullet.position.y > positions.ScreenMiddle.y + sizes.PlayingAreaDiameter / 2.0 - bullet.size.height / 2.0 {
+                bullet.removeFromParent()
+                bulletNodes.remove(bullet)
+                
+                if game.bullets == 0 {
+                    game.endGame()
+                }
+            }
+        }
+    }
+    
+    private func rotateTargetNodes() {
+        for targetNode in currentPatternNodes where targetNode.shouldRotate == true {
+            let direction: CGFloat = game.stage % 2 == 1 ? 1 : -1
+            targetNode.zRotation += CGFloat(dt) * speeds.Target * direction
+        }
     }
     
     public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         switch sceneState as SceneState {
         case .Menu: menuNode?.touchesBegan(touches, withEvent: event)
-        case .Playing: playingNode?.touchesBegan(touches, withEvent: event)
+        case .Playing:
+            playingNode?.touchesBegan(touches, withEvent: event)
+            shootBullet()
         case .GameOver: gameOverNode?.touchesBegan(touches, withEvent: event)
         }
     }
@@ -133,6 +264,35 @@ public class Scene: SKScene, GameDelegate {
         }
     }
     
+}
+
+extension Scene: SKPhysicsContactDelegate {
+    public func didBeginContact(contact: SKPhysicsContact) {
+        let bulletBody: SKPhysicsBody = contact.bodyA.categoryBitMask == EntityType.Bullet.rawValue ? contact.bodyA : contact.bodyB
+        let targetBody: SKPhysicsBody = contact.bodyA.categoryBitMask == EntityType.Target.rawValue ? contact.bodyA : contact.bodyB
+        
+        if let bulletNode = bulletBody.node as? BulletNode {
+            var bullet = bulletNode.bullet
+            
+            if !bullet.didHit {
+                bullet.hit()
+                game.increaseScore()
+                
+                bulletNode.removeFromParent()
+                bulletNodes.remove(bulletNode)
+                
+                let index = currentPatternNodes.indexOf(targetBody.node as! TargetNode)!
+                currentPatternNodes.removeAtIndex(index)
+                targetBody.node?.removeFromParent()
+                
+                if currentPatternNodes.count == 0 {
+                    game.nextStage()
+                }
+            }
+        }
+        
+        
+    }
 }
 
 extension Scene: SceneDelegate {

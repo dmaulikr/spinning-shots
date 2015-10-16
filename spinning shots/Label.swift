@@ -21,6 +21,8 @@ public class Label: SKLabelNode {
         self.text = text
         self.fontSize = fontSize
         self.fontColor = fontColor
+        
+        zPosition = ZPositions.UILabel
     }
     
     public convenience init(text: String, fontSize: CGFloat) {

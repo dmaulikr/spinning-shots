@@ -11,15 +11,15 @@ import SpriteKit
 public class Textures {
     public static let sharedTextures = Textures()
     
-    public let Player: SKTexture
+    public let Cannon: SKTexture
     public let Target: SKTexture
     public let Bullet: SKTexture
     
     let sizes = Values.sharedValues.sizes
     
     init() {
-        Player = SKTexture()
+        Cannon = SKTexture(image: StyleKit.imageOfCannon(size: sizes.Cannon))
         Target = SKTexture()
-        Bullet = SKTexture()
+        Bullet = SKTexture(image: StyleKit.imageOfBullet(size: sizes.Bullet))
     }
 }

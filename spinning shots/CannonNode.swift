@@ -1,5 +1,5 @@
 //
-//  PlayerNode.swift
+//  CannonNode.swift
 //  spinning shots
 //
 //  Created by Marc Zobec on 2015-10-06.
@@ -8,14 +8,16 @@
 
 import SpriteKit
 
-public class PlayerNode: SKSpriteNode {
+public class CannonNode: SKSpriteNode {
     
-    public var player: Player
+    public var cannon: Cannon
     
     public init() {
-        self.player = Player()
-        let texture = Textures.sharedTextures.Player
+        self.cannon = Cannon()
+        let texture = Textures.sharedTextures.Cannon
         super.init(texture: texture, color: Colors.Clear, size: texture.size())
+        print("\(frame.size)")
+        zPosition = ZPositions.Cannon
     }
     
     public required init?(coder aDecoder: NSCoder) {

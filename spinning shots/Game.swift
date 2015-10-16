@@ -10,11 +10,11 @@ import Foundation
 
 
 public enum EntityType: UInt32 {
-    case Player = 1
+    case Cannon = 1
     case Target = 2
     case Bullet = 4
     
-    public static let allTypes = [Player, Target, Bullet]
+    public static let allTypes = [Cannon, Target, Bullet]
 }
 
 public enum ItemType: Int {
@@ -25,12 +25,16 @@ public protocol GameDelegate {
     func gameDidStart()
     func gameDidEnd(score: Int)
     
+    func gameDidProceedToStage(stage: Int)
     func gameDidScore(newScore: Int)
+    func gameDidChangeAmountOfBullets(byAmount: Int, totalAmount: Int)
 }
 
 public class Game {
     private var isRunning = false
     private(set) public var score = 0
+    private(set) public var stage = 0
+    private(set) public var bullets = 0
     
     public var gameDelegate: GameDelegate?
     
@@ -40,6 +44,8 @@ public class Game {
     
     public func startNewGame() {
         score = 0
+        stage = 1
+        bullets = 1
         isRunning = true
         
         gameDelegate?.gameDidStart()
@@ -49,6 +55,31 @@ public class Game {
         isRunning = false
         
         gameDelegate?.gameDidEnd(score)
+    }
+    
+    public func increaseScore() {
+        score++
+        addBullet()
+        
+        gameDelegate?.gameDidScore(score)
+    }
+    
+    public func shootBullet() {
+        bullets--
+        
+        gameDelegate?.gameDidChangeAmountOfBullets(-1, totalAmount: bullets)
+    }
+    
+    public func addBullet() {
+        bullets++
+        
+        gameDelegate?.gameDidChangeAmountOfBullets(1, totalAmount: bullets)
+    }
+    
+    public func nextStage() {
+        stage++
+        
+        gameDelegate?.gameDidProceedToStage(stage)
     }
     
     public func tick(timeDelta: NSTimeInterval) {

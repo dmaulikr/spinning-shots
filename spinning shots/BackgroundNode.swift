@@ -12,6 +12,7 @@ public class BackgroundNode: SKSpriteNode {
     
     public init() {
         super.init(texture: nil, color: Colors.Background, size: Values.sharedValues.sizes.Screen)
+        
         zPosition = ZPositions.Background
     }
     

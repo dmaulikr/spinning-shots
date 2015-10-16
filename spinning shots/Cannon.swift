@@ -1,5 +1,5 @@
 //
-//  Player.swift
+//  Cannon.swift
 //  spinning shots
 //
 //  Created by Marc Zobec on 2015-10-06.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-public struct Player: Entity {
+public struct Cannon: Entity {
     
     public var type: EntityType {
-        return .Player
+        return .Cannon
     }
     
 }
