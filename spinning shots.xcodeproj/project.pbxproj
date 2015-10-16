@@ -39,6 +39,7 @@
 		B6D352C61BC451AA00498C8E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D352C51BC451AA00498C8E /* Settings.swift */; settings = {ASSET_TAGS = (); }; };
 		B6D352C81BC451C800498C8E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D352C71BC451C800498C8E /* SoundManager.swift */; settings = {ASSET_TAGS = (); }; };
 		B6D352CA1BC456B400498C8E /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D352C91BC456B400498C8E /* StyleKit.swift */; settings = {ASSET_TAGS = (); }; };
+		B6F540511BD1A42F00978E9F /* TargetNodeCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F540501BD1A42F00978E9F /* TargetNodeCreator.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		B6D352C51BC451AA00498C8E /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B6D352C71BC451C800498C8E /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		B6D352C91BC456B400498C8E /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
+		B6F540501BD1A42F00978E9F /* TargetNodeCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetNodeCreator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 				B6D352C31BC4517A00498C8E /* GameCenterManager.swift */,
 				B6D352C51BC451AA00498C8E /* Settings.swift */,
 				B6D352C71BC451C800498C8E /* SoundManager.swift */,
+				B6F540501BD1A42F00978E9F /* TargetNodeCreator.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				B6D352A71BC445D500498C8E /* Constants.swift in Sources */,
 				B6D352BE1BC44FCC00498C8E /* TargetNode.swift in Sources */,
 				B6D352AD1BC44B3E00498C8E /* Entity.swift in Sources */,
+				B6F540511BD1A42F00978E9F /* TargetNodeCreator.swift in Sources */,
 				B661ED1B1BC9268D006EF8A9 /* TargetPattern.swift in Sources */,
 				B6D352761BC42BD700498C8E /* AppDelegate.swift in Sources */,
 				B6D352C21BC4511900498C8E /* BackgroundNode.swift in Sources */,

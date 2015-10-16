@@ -129,31 +129,18 @@ public class Scene: SKScene, GameDelegate {
         physicsWorld.contactDelegate = self
     }
     
-    private func createTargetNode(degrees: CGFloat, rotation: CGFloat) -> TargetNode {
-        let target = Target(degrees: degrees, rotation: rotation)
-        return TargetNode(target: target, thickness: sizes.TargetThickness, inRectWithDiameter: sizes.PlayingAreaDiameter)
-    }
-    
-    private func createTargetNodes(pattern: TargetPattern) -> [TargetNode] {
-        var targetNodes = [TargetNode]()
-        for i in 0..<pattern.count {
-            let targetNode = createTargetNode(pattern.targetSize, rotation: pattern.targets[i].rotation)
-            targetNode.alpha = 0.0
-            rotationNode.addChild(targetNode)
-            targetNodes.append(targetNode)
-        }
-        return targetNodes
-    }
-    
     private func createPatternForStage(stage: Int) -> TargetPattern {
         return TargetPattern(targetCount: stage + 9, gap: 5.0)
     }
     
     private func loadPattern(pattern: TargetPattern) {
-        currentPatternNodes = createTargetNodes(pattern)
+        currentPatternNodes = TargetNodeCreator.create(pattern)
         
         let waitTime = 0.05
         for (index, arc) in currentPatternNodes.enumerate() {
+            arc.alpha = 0.0
+            rotationNode.addChild(arc)
+            
             let wait = SKAction.waitForDuration(waitTime * Double(index))
             let fadeIn = SKAction.fadeAlphaTo(1.0, duration: ActionDuration)
             arc.runAction(SKAction.sequence([wait, fadeIn]))
