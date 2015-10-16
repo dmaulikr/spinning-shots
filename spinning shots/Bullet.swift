@@ -10,6 +10,12 @@ import Foundation
 
 public struct Bullet: Entity {
     
+    private(set) public var didHit = false
+    
+    public mutating func hit() {
+        didHit = true
+    }
+    
     public var type: EntityType {
         return .Bullet
     }

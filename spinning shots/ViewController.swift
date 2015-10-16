@@ -20,6 +20,7 @@ class ViewController: UIViewController {
         let skView = self.view as! SKView
         skView.showsFPS = false
         skView.showsNodeCount = false
+        skView.showsPhysics = false
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)

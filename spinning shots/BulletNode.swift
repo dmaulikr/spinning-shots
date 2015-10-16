@@ -15,7 +15,15 @@ public class BulletNode: SKSpriteNode {
     public init() {
         self.bullet = Bullet()
         let texture = Textures.sharedTextures.Bullet
-        super.init(texture: texture, color: Colors.Clear, size: texture.size())
+        let textureSize = texture.size()
+        super.init(texture: texture, color: Colors.Clear, size: textureSize)
+        print("# \(frame.size)")
+        physicsBody = SKPhysicsBody(rectangleOfSize: textureSize, center: .zero)
+        physicsBody?.categoryBitMask = EntityType.Bullet.rawValue
+        physicsBody?.collisionBitMask = 0
+        physicsBody?.contactTestBitMask = EntityType.Target.rawValue
+        
+        zPosition = ZPositions.Bullet
     }
     
     public required init?(coder aDecoder: NSCoder) {
