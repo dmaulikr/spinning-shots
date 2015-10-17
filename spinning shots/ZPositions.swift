@@ -19,5 +19,6 @@ public struct ZPositions {
     public static let OvalBorder = CGFloat(9)
     
     public static let UINode = CGFloat(10)
-    public static let UILabel = CGFloat(11)
+    public static let UIButton = CGFloat(11)
+    public static let UILabel = CGFloat(12)
 }

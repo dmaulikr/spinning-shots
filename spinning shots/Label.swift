@@ -10,14 +10,9 @@ import SpriteKit
 
 public class Label: SKLabelNode {
     
-    public init(text: String, fontSize: CGFloat, fontColor: UIColor, fontStyle: String? = nil) {
-        var font = FontName
-        if let style = fontStyle {
-            font = "\(FontName)\(style)"
-        }
-        
-        super.init(fontNamed: font)
-        
+    public init(text: String, fontSize: CGFloat, fontColor: UIColor) {
+        super.init()
+
         self.text = text
         self.fontSize = fontSize
         self.fontColor = fontColor
@@ -26,7 +21,7 @@ public class Label: SKLabelNode {
     }
     
     public convenience init(text: String, fontSize: CGFloat) {
-        self.init(text: text, fontSize: fontSize, fontColor: .blackColor(), fontStyle: "Light")
+        self.init(text: text, fontSize: fontSize, fontColor: .blackColor())
     }
     
     override public init() {

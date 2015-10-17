@@ -33,8 +33,8 @@ public protocol GameDelegate {
 public class Game {
     private var isRunning = false
     private(set) public var score = 0
-    private(set) public var stage = 0
-    private(set) public var bullets = 0
+    private(set) public var stage = 1
+    private(set) public var bullets = 1
     
     public var gameDelegate: GameDelegate?
     

@@ -30,9 +30,10 @@ public struct Sizes {
     public let BorderStrokeWidth: CGFloat
     
     public let Cannon: CGSize
-    
     public let Bullet: CGSize
     public let TargetThickness: CGFloat
+    
+    public let MenuButtonPlayDiameter: CGFloat
     
     private init() {
         let delegate = UIApplication.sharedApplication().delegate! as! AppDelegate
@@ -54,6 +55,8 @@ public struct Sizes {
         Bullet = CGSize(width: bulletWidth, height: bulletHeight)
         
         TargetThickness = cannonHeight * 0.5
+        
+        MenuButtonPlayDiameter = PlayingAreaDiameter * 0.2
     }
 }
 

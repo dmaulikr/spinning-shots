@@ -15,11 +15,15 @@ public class Textures {
     public let Target: SKTexture
     public let Bullet: SKTexture
     
+    public let PlayButton: SKTexture
+    
     let sizes = Values.sharedValues.sizes
     
     init() {
         Cannon = SKTexture(image: StyleKit.imageOfCannon(size: sizes.Cannon))
         Target = SKTexture()
         Bullet = SKTexture(image: StyleKit.imageOfBullet(size: sizes.Bullet))
+        
+        PlayButton = SKTexture(image: StyleKit.imageOfPlayButton(diameter: sizes.MenuButtonPlayDiameter))
     }
 }

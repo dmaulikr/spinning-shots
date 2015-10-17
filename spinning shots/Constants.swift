@@ -9,4 +9,3 @@
 import Foundation
 
 let ActionDuration: Double = 1/3
-let FontName = "Avenir"
