@@ -48,22 +48,26 @@ public class Scene: SKScene, GameDelegate {
         game.gameDelegate = self
         
         initBackgroundNode()
+        initObjectsNode()
+        initRotationNode()
+        initBorderNode()
+        
+        initPhysics()
         
         switchToState(.Menu)
     }
     
     public func gameDidStart() {
         isGameRunning = true
-        
-        let pattern = TargetNodeCreator.patternForStage(game.stage)
-        loadPattern(pattern)
     }
     
     public func gameDidEnd(score: Int) {
         isGameRunning = false
         
         // remove entities etc from ui
-        objectsNode.removeFromParent()
+        objectsNode.removeAllChildren()
+        rotationNode.removeAllChildren()
+        objectsNode.addChild(rotationNode)
         
         saveScore(score)
         
@@ -90,13 +94,8 @@ public class Scene: SKScene, GameDelegate {
     }
     
     public func startNewGame() {
-        initObjectsNode()
-        initBorderNode()
-        initRotationNode()
         initCannonNode()
         bulletNodes = []
-        
-        initPhysics()
         
         game.startNewGame()
     }
@@ -109,7 +108,7 @@ public class Scene: SKScene, GameDelegate {
     private func initBorderNode() {
         borderNode = OvalBorderNode(diameter: sizes.BorderDiameter, strokeWidth: sizes.BorderStrokeWidth)
         borderNode.position = positions.OvalBorderNode
-        objectsNode.addChild(borderNode)
+        //objectsNode.addChild(borderNode)
     }
     
     private func initRotationNode() {
@@ -169,11 +168,12 @@ public class Scene: SKScene, GameDelegate {
         
         lastUpdateTime = currentTime
         
+        rotateTargetNodes()
+        
         guard isGameRunning else { return }
         
         game.tick(dt)
         moveBullets(dt)
-        rotateTargetNodes()
     }
     
     private func moveBullets(dt: NSTimeInterval) {
@@ -211,6 +211,9 @@ public class Scene: SKScene, GameDelegate {
     private func switchToState(state: SceneState) {
         func switchToMenuState() {
             sceneState = .Menu
+            
+            let pattern = TargetNodeCreator.patternForStage(game.stage)
+            loadPattern(pattern)
             
             menuNode = MenuNode(sceneDelegate: self)
             addChild(menuNode!)
