@@ -25,4 +25,8 @@ public class TargetNodeCreator {
         return targetNodes
     }
     
+    public static func patternForStage(stage: Int) -> TargetPattern {
+        return TargetPattern(targetCount: stage + 9, gap: 5.0)
+    }
+    
 }

@@ -55,7 +55,7 @@ public class Scene: SKScene, GameDelegate {
     public func gameDidStart() {
         isGameRunning = true
         
-        let pattern = createPatternForStage(game.stage)
+        let pattern = TargetNodeCreator.patternForStage(game.stage)
         loadPattern(pattern)
     }
     
@@ -71,7 +71,7 @@ public class Scene: SKScene, GameDelegate {
     }
     
     public func gameDidProceedToStage(stage: Int) {
-        let pattern = createPatternForStage(stage)
+        let pattern = TargetNodeCreator.patternForStage(stage)
         loadPattern(pattern)
     }
     
@@ -127,10 +127,6 @@ public class Scene: SKScene, GameDelegate {
     private func initPhysics() {
         physicsWorld.gravity = CGVectorMake(0.0, 0.0)
         physicsWorld.contactDelegate = self
-    }
-    
-    private func createPatternForStage(stage: Int) -> TargetPattern {
-        return TargetPattern(targetCount: stage + 9, gap: 5.0)
     }
     
     private func loadPattern(pattern: TargetPattern) {
