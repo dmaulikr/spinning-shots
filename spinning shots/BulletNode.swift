@@ -17,7 +17,7 @@ public class BulletNode: SKSpriteNode {
         let texture = Textures.sharedTextures.Bullet
         let textureSize = texture.size()
         super.init(texture: texture, color: Colors.Clear, size: textureSize)
-        print("# \(frame.size)")
+        
         physicsBody = SKPhysicsBody(rectangleOfSize: textureSize, center: .zero)
         physicsBody?.categoryBitMask = EntityType.Bullet.rawValue
         physicsBody?.collisionBitMask = 0

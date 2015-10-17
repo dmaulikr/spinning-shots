@@ -16,7 +16,6 @@ public class CannonNode: SKSpriteNode {
         self.cannon = Cannon()
         let texture = Textures.sharedTextures.Cannon
         super.init(texture: texture, color: Colors.Clear, size: texture.size())
-        print("\(frame.size)")
         zPosition = ZPositions.Cannon
     }
     
