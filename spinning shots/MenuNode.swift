@@ -11,7 +11,8 @@ import SpriteKit
 public class MenuNode: SKNode {
     
     private var sceneDelegate: SceneDelegate
-    private var tmpLabel: Label!
+    private var playButton: Button!
+    
     
     private var isTransitionRunning = false
     
@@ -25,16 +26,17 @@ public class MenuNode: SKNode {
     }
     
     private func setupUI() {
-        tmpLabel = Label(text: "Menu", fontSize: 24.0)
-        tmpLabel.name = "tmpLabel"
-        tmpLabel.position = Values.sharedValues.sizes.Screen.middle
-        tmpLabel.horizontalAlignmentMode = .Center
-        tmpLabel.verticalAlignmentMode = .Center
-        tmpLabel.alpha = 0.0
-        addChild(tmpLabel)
+        playButton = Button(item: .Play)
+        playButton.name = "playButton"
+        playButton.position = Values.sharedValues.sizes.Screen.middle
+        playButton.alpha = 0.0
+        playButton.setScale(0.0)
+        addChild(playButton)
         
         let fadeIn = SKAction.fadeInWithDuration(ActionDuration)
-        tmpLabel.runAction(fadeIn)
+        let scaleUp = SKAction.scaleTo(1.0, duration: ActionDuration)
+        let fadeInAndScaleUp = SKAction.group([fadeIn, scaleUp])
+        playButton.runAction(fadeInAndScaleUp)
     }
     
     public func close(withTargetState targetState: SceneState) {
@@ -44,7 +46,7 @@ public class MenuNode: SKNode {
         let fadeOutAndPop = SKAction.group([fadeOut, SKAction.popAction])
         
         let groupAction = SKAction.group([
-            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: tmpLabel.name!)
+            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: playButton.name!)
             ])
         
         let sequenceAction = SKAction.sequence([
@@ -66,7 +68,11 @@ public class MenuNode: SKNode {
     public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         guard !isTransitionRunning else { return }
         
-        close(withTargetState: .Playing)
+        let location = touches.first!.locationInNode(self)
+        
+        if CGRectContainsPoint(playButton.frame, location) {
+            close(withTargetState: .Playing)
+        }
     }
     
     public required init?(coder aDecoder: NSCoder) {
