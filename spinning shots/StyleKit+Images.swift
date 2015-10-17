@@ -12,7 +12,7 @@ extension StyleKit {
     
     public class func imageOfCannon(size size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        StyleKit.drawCannon(frame: CGRectMake(0, 0, size.width, size.height), cannonColor: Colors.Cannon, cannonStrokeColor: Colors.Stroke)
+        drawCannon(frame: CGRectMake(0, 0, size.width, size.height), cannonColor: Colors.Cannon, cannonStrokeColor: Colors.Stroke)
         
         let imageOfCannon = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -22,7 +22,7 @@ extension StyleKit {
     
     public class func imageOfBullet(size size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        StyleKit.drawBullet(frame: CGRectMake(0, 0, size.width, size.height), bulletColor: Colors.Bullet)
+        drawBullet(frame: CGRectMake(0, 0, size.width, size.height), bulletColor: Colors.Bullet)
         
         let imageOfBullet = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -32,8 +32,7 @@ extension StyleKit {
     
     public class func imageOfPlayButton(diameter diameter: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
-        StyleKit.drawPlayButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Stroke, buttonFrameDiameter: diameter)
-            drawBullet(frame: CGRectMake(0, 0, diameter, diameter), bulletColor: Colors.Bullet)
+        drawPlayButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Stroke, buttonFrameDiameter: diameter)
         
         let imageOfPlayButton = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
