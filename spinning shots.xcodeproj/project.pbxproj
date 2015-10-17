@@ -40,6 +40,7 @@
 		B6D352C81BC451C800498C8E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D352C71BC451C800498C8E /* SoundManager.swift */; settings = {ASSET_TAGS = (); }; };
 		B6D352CA1BC456B400498C8E /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D352C91BC456B400498C8E /* StyleKit.swift */; settings = {ASSET_TAGS = (); }; };
 		B6F540511BD1A42F00978E9F /* TargetNodeCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F540501BD1A42F00978E9F /* TargetNodeCreator.swift */; settings = {ASSET_TAGS = (); }; };
+		B6FC6A171BD2716900229584 /* InstanceCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC6A161BD2716900229584 /* InstanceCounter.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		B6D352C71BC451C800498C8E /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		B6D352C91BC456B400498C8E /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		B6F540501BD1A42F00978E9F /* TargetNodeCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetNodeCreator.swift; sourceTree = "<group>"; };
+		B6FC6A161BD2716900229584 /* InstanceCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstanceCounter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 				B6D352C51BC451AA00498C8E /* Settings.swift */,
 				B6D352C71BC451C800498C8E /* SoundManager.swift */,
 				B6F540501BD1A42F00978E9F /* TargetNodeCreator.swift */,
+				B6FC6A161BD2716900229584 /* InstanceCounter.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6D352CA1BC456B400498C8E /* StyleKit.swift in Sources */,
+				B6FC6A171BD2716900229584 /* InstanceCounter.swift in Sources */,
 				B6D352B31BC44B9D00498C8E /* Bullet.swift in Sources */,
 				B6D352BC1BC44E7500498C8E /* Colors.swift in Sources */,
 				B6D3528F1BC43F0B00498C8E /* Scene.swift in Sources */,
@@ -443,6 +447,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "spinning shots/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D INSTANCECOUNTING";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.marczobec.spinning-shots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
