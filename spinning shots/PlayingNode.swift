@@ -24,6 +24,8 @@ public class PlayingNode: SKNode {
         zPosition = ZPositions.UINode
         
         setupUI()
+        
+        InstanceCountingInitInstance(self)
     }
     
     private func setupUI() {

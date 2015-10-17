@@ -33,6 +33,8 @@ public class Settings {
             self.bestScore = defaults.integerForKey(SettingsBestScoreKey)
             self.isMusicEnabled = defaults.boolForKey(SettingsMusicEnabledKey)
         }
+        
+        InstanceCountingInitInstance(self)
     }
     
     private func setWasLaunchedBefore(launchedBefore: Bool) {

@@ -14,6 +14,8 @@ public class BackgroundNode: SKSpriteNode {
         super.init(texture: nil, color: Colors.Background, size: Values.sharedValues.sizes.Screen)
         
         zPosition = ZPositions.Background
+        
+        InstanceCountingInitInstance(self)
     }
     
     required public init?(coder aDecoder: NSCoder) {

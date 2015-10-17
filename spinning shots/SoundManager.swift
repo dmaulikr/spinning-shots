@@ -33,6 +33,8 @@ public class SoundManager {
     
     private init() {
         //initSounds()
+        
+        InstanceCountingInitInstance(self)
     }
     
     public func setup(scene: SKScene) {

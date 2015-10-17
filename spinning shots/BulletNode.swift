@@ -24,6 +24,8 @@ public class BulletNode: SKSpriteNode {
         physicsBody?.contactTestBitMask = EntityType.Target.rawValue
         
         zPosition = ZPositions.Bullet
+        
+        InstanceCountingInitInstance(self)
     }
     
     public required init?(coder aDecoder: NSCoder) {

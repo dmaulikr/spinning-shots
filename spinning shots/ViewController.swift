@@ -29,6 +29,8 @@ class ViewController: UIViewController {
         //SoundManager.sharedManager.setup(scene)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("shareScore:"), name: "ShareScore", object: nil)
+        
+        InstanceCountingInitInstance(self)
     }
     
     func shareScore(notification: NSNotification) {

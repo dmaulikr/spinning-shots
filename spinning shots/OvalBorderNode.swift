@@ -21,6 +21,8 @@ public class OvalBorderNode: SKShapeNode {
         
         zPosition = ZPositions.OvalBorder
         alpha = 0.25
+        
+        InstanceCountingInitInstance(self)
     }
     
     public required init?(coder aDecoder: NSCoder) {

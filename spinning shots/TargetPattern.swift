@@ -25,6 +25,8 @@ public class TargetPattern {
         self.count = targetCount
         
         createTargets()
+        
+        InstanceCountingInitInstance(self)
     }
     
     public init(targetSize: CGFloat) {
@@ -36,6 +38,8 @@ public class TargetPattern {
         self.gap = remainingSize / CGFloat(count)
         
         createTargets()
+        
+        InstanceCountingInitInstance(self)
     }
     
     public init(targetCount: Int, targetSize: CGFloat) {
@@ -48,6 +52,8 @@ public class TargetPattern {
         self.count = targetCount
         
         createTargets()
+        
+        InstanceCountingInitInstance(self)
     }
     
     private func createTargets() {

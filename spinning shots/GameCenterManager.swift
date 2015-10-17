@@ -18,6 +18,8 @@ public class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     public func setup(withPresentingViewController viewController: UIViewController) {
         presentingViewController = viewController
         authenticatePlayer()
+        
+        InstanceCountingInitInstance(self)
     }
     
     public func reportScore(score: Int) {

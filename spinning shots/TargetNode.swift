@@ -41,6 +41,8 @@ public class TargetNode: SKShapeNode {
         physicsBody?.contactTestBitMask = EntityType.Bullet.rawValue
         
         zPosition = ZPositions.Target
+        
+        InstanceCountingInitInstance(self)
     }
     
     public required init?(coder aDecoder: NSCoder) {

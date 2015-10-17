@@ -39,7 +39,7 @@ public class Game {
     public var gameDelegate: GameDelegate?
     
     public init() {
-        
+        InstanceCountingInitInstance(self)
     }
     
     public func startNewGame() {

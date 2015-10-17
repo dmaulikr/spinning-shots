@@ -17,6 +17,8 @@ public class CannonNode: SKSpriteNode {
         let texture = Textures.sharedTextures.Cannon
         super.init(texture: texture, color: Colors.Clear, size: texture.size())
         zPosition = ZPositions.Cannon
+        
+        InstanceCountingInitInstance(self)
     }
     
     public required init?(coder aDecoder: NSCoder) {

@@ -44,6 +44,8 @@ public class Scene: SKScene, GameDelegate {
     private let speeds = Values.sharedValues.speeds
     
     public override func didMoveToView(view: SKView) {
+        InstanceCountingInitInstance(self)
+        
         game = Game()
         game.gameDelegate = self
         

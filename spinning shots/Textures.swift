@@ -25,5 +25,7 @@ public class Textures {
         Bullet = SKTexture(image: StyleKit.imageOfBullet(size: sizes.Bullet))
         
         PlayButton = SKTexture(image: StyleKit.imageOfPlayButton(diameter: sizes.MenuButtonPlayDiameter))
+        
+        InstanceCountingInitInstance(self)
     }
 }

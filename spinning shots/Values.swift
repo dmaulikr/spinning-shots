@@ -19,6 +19,8 @@ public class Values {
         self.sizes = Sizes()
         self.positions = Positions(sizes: sizes)
         self.speeds = Speeds(sizes: sizes)
+        
+        InstanceCountingInitInstance(self)
     }
 }
 

@@ -21,6 +21,8 @@ public class Button: SKSpriteNode {
         let texture = Button.textureForItem(item)
         super.init(texture: texture, color: Colors.Clear, size: texture.size())
         zPosition = ZPositions.UIButton
+        
+        InstanceCountingInitInstance(self)
     }
     
     private static func textureForItem(item: ButtonItem) -> SKTexture {

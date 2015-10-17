@@ -79,9 +79,11 @@ private class InstanceCounter {
     }
     
     private func dump() {
+        print("### DUMP START")
         dump { (className, wrapperArray) in
             print(className + ": \(wrapperArray.count) instances")
         }
+        print("### DUMP END")
     }
 }
 

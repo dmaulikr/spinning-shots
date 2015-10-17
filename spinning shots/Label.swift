@@ -18,6 +18,8 @@ public class Label: SKLabelNode {
         self.fontColor = fontColor
         
         zPosition = ZPositions.UILabel
+        
+        InstanceCountingInitInstance(self)
     }
     
     public convenience init(text: String, fontSize: CGFloat) {

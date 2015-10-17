@@ -24,6 +24,8 @@ public class GameOverNode: SKNode {
         zPosition = ZPositions.UINode
         
         setupUI()
+        
+        InstanceCountingInitInstance(self)
     }
     
     private func setupUI() {

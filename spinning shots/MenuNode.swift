@@ -23,6 +23,8 @@ public class MenuNode: SKNode {
         zPosition = ZPositions.UINode
         
         setupUI()
+        
+        InstanceCountingInitInstance(self)
     }
     
     private func setupUI() {
@@ -72,6 +74,8 @@ public class MenuNode: SKNode {
         
         if CGRectContainsPoint(playButton.frame, location) {
             close(withTargetState: .Playing)
+        } else {
+            InstanceCountingDumpInstances()
         }
     }
     
