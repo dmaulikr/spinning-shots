@@ -163,8 +163,8 @@ public class Scene: SKScene, GameDelegate {
         super.update(currentTime)
         
         dt =  lastUpdateTime > 0 ? currentTime - lastUpdateTime : 0.0
-        if dt > 1.0/30.0 {
-            dt = 1.0/30.0
+        if dt > 1.0/60.0 {
+            dt = 1.0/60.0
         }
         
         lastUpdateTime = currentTime
