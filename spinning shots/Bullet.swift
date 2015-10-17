@@ -11,9 +11,19 @@ import Foundation
 public struct Bullet: Entity {
     
     private(set) public var didHit = false
+    private(set) public var wasShot = false
     
     public mutating func hit() {
         didHit = true
+    }
+    
+    public mutating func shoot() {
+        wasShot = true
+    }
+    
+    public mutating func reload() {
+        wasShot = false
+        didHit = false
     }
     
     public var type: EntityType {

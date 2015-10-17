@@ -37,6 +37,8 @@ public struct Sizes {
     
     public let MenuButtonPlayDiameter: CGFloat
     
+    public let PlayingScoreLabelSize: CGFloat
+    
     private init() {
         let delegate = UIApplication.sharedApplication().delegate! as! AppDelegate
         let gameVC = delegate.window!.rootViewController as! ViewController
@@ -59,6 +61,8 @@ public struct Sizes {
         TargetThickness = cannonHeight * 0.5
         
         MenuButtonPlayDiameter = PlayingAreaDiameter * 0.2
+        
+        PlayingScoreLabelSize = PlayingAreaDiameter * 0.2
     }
 }
 
@@ -66,11 +70,13 @@ public struct Positions {
     public let ScreenMiddle: CGPoint
     public let OvalBorderNode: CGPoint
     public let Cannon: CGPoint
+    public let CannonBullet: CGPoint
     
     private init(sizes: Sizes) {
         ScreenMiddle = sizes.Screen.middle
         OvalBorderNode = CGPoint(x: (sizes.Screen.width - sizes.BorderDiameter) / 2.0, y: sizes.Screen.middle.y - sizes.BorderDiameter / 2.0)
         Cannon = ScreenMiddle
+        CannonBullet = CGPoint(x: Cannon.x, y: Cannon.y + sizes.Cannon.height * 0.33)
     }
 }
 

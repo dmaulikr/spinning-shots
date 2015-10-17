@@ -11,7 +11,6 @@ import SpriteKit
 public class PlayingNode: SKNode {
     private var sceneDelegate: SceneDelegate
     private var scoreLabel: Label!
-    private var bulletsLabel: Label!
     
     private var isTransitionRunning = false
     
@@ -29,33 +28,24 @@ public class PlayingNode: SKNode {
     }
     
     private func setupUI() {
-        scoreLabel = Label(text: "Score: 0", fontSize: 24.0)
+        scoreLabel = Label(text: "0", fontSize: sizes.PlayingScoreLabelSize)
         scoreLabel.name = "scoreLabel"
-        scoreLabel.position = CGPoint(x: sizes.Screen.middle.x, y: sizes.Screen.height * 0.9)
+        let scoreLabelPosY = sizes.Screen.height - scoreLabel.frame.height / 2.0 - 32.0
+        scoreLabel.position = CGPoint(x: sizes.Screen.middle.x, y: scoreLabelPosY)
         scoreLabel.horizontalAlignmentMode = .Center
         scoreLabel.verticalAlignmentMode = .Center
         scoreLabel.alpha = 0.0
+        scoreLabel.setScale(0.0)
         addChild(scoreLabel)
         
-        bulletsLabel = Label(text: "Bullets: 1", fontSize: 24.0)
-        bulletsLabel.name = "bulletsLabel"
-        bulletsLabel.position = CGPoint(x: sizes.Screen.middle.x, y: sizes.Screen.height * 0.85)
-        bulletsLabel.horizontalAlignmentMode = .Center
-        bulletsLabel.verticalAlignmentMode = .Center
-        bulletsLabel.alpha = 0.0
-        addChild(bulletsLabel)
-        
         let fadeIn = SKAction.fadeInWithDuration(ActionDuration)
-        scoreLabel.runAction(fadeIn)
-        bulletsLabel.runAction(fadeIn)
+        let scaleup = SKAction.scaleTo(1.0, duration: ActionDuration)
+        let fadeInAndScaleUp = SKAction.group([fadeIn, scaleup])
+        scoreLabel.runAction(fadeInAndScaleUp)
     }
     
     public func updateScoreLabel(withScore score: Int) {
-        scoreLabel.text = "Score: \(score)"
-    }
-    
-    public func updateBulletsLabel(withBullets bullets: Int) {
-        bulletsLabel.text = "Bullets: \(bullets)"
+        scoreLabel.text = "\(score)"
     }
     
     public func close(withTargetState targetState: SceneState) {
@@ -65,8 +55,7 @@ public class PlayingNode: SKNode {
         let fadeOutAndPop = SKAction.group([fadeOut, SKAction.popAction])
         
         let groupAction = SKAction.group([
-            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: scoreLabel.name!),
-            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: bulletsLabel.name!)
+            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: scoreLabel.name!)
             ])
         
         let sequenceAction = SKAction.sequence([
