@@ -15,14 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        preloadFont()
-        
         return true
-    }
-    
-    func preloadFont() {
-        let preloadLabel = SKLabelNode(fontNamed: "Avenir-Medium")
-        preloadLabel.text = "preload!"
     }
     
     func applicationWillResignActive(application: UIApplication) {
