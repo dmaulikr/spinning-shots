@@ -36,8 +36,10 @@ public class Scene: SKScene, GameDelegate {
     
     private var cannonNode: CannonNode!
     private var targetNode: SKSpriteNode!
-    private var bulletNodes: Set<BulletNode>!
+    private var bulletNode: BulletNode!
     private var currentPatternNodes: [TargetNode] = []
+    
+    private var shouldReloadBulletOnNextUpdate = false
     
     private let sizes = Values.sharedValues.sizes
     private let positions = Values.sharedValues.positions
@@ -86,7 +88,9 @@ public class Scene: SKScene, GameDelegate {
     }
     
     public func gameDidChangeAmountOfBullets(byAmount: Int, totalAmount: Int) {
-        playingNode?.updateBulletsLabel(withBullets: totalAmount)
+        if totalAmount > 0 {
+            shouldReloadBulletOnNextUpdate = true
+        }
     }
     
     private func initBackgroundNode() {
@@ -97,7 +101,7 @@ public class Scene: SKScene, GameDelegate {
     
     public func startNewGame() {
         initCannonNode()
-        bulletNodes = []
+        initBulletNode()
         
         game.startNewGame()
     }
@@ -125,6 +129,12 @@ public class Scene: SKScene, GameDelegate {
         objectsNode.addChild(cannonNode)
     }
     
+    private func initBulletNode() {
+        bulletNode = BulletNode()
+        bulletNode.position = positions.CannonBullet
+        objectsNode.addChild(bulletNode)
+    }
+    
     private func initPhysics() {
         physicsWorld.gravity = CGVectorMake(0.0, 0.0)
         physicsWorld.contactDelegate = self
@@ -150,13 +160,9 @@ public class Scene: SKScene, GameDelegate {
     }
     
     private func shootBullet() {
-        if game.bullets > 0 {
+        if game.bullets > 0 && !bulletNode.bullet.wasShot {
             game.shootBullet()
-            
-            let bulletNode = BulletNode()
-            bulletNode.position = positions.ScreenMiddle
-            objectsNode.addChild(bulletNode)
-            bulletNodes.insert(bulletNode)
+            bulletNode.bullet.shoot()
         }
     }
     
@@ -179,12 +185,22 @@ public class Scene: SKScene, GameDelegate {
     }
     
     private func moveBullets(dt: NSTimeInterval) {
-        for bullet in bulletNodes {
-            bullet.moveBy(CGPoint(x: 0, y: speeds.Bullet), dt: dt)
+        if shouldReloadBulletOnNextUpdate {
+            shouldReloadBulletOnNextUpdate = false
+            bulletNode.position = positions.Cannon
             
-            if bullet.position.y > positions.ScreenMiddle.y + sizes.PlayingAreaDiameter / 2.0 - bullet.size.height / 2.0 {
-                bullet.removeFromParent()
-                bulletNodes.remove(bullet)
+            let move = SKAction.moveTo(positions.CannonBullet, duration: ActionDuration / 3.0)
+            let block = SKAction.runBlock {
+                self.bulletNode.bullet.reload()
+            }
+            let sequence = SKAction.sequence([move, block])
+            bulletNode.runAction(sequence)
+        }
+        
+        if bulletNode.bullet.wasShot {
+            bulletNode.moveBy(CGPoint(x: 0, y: speeds.Bullet), dt: dt)
+            if bulletNode.position.y > positions.ScreenMiddle.y + sizes.PlayingAreaDiameter / 2.0 - bulletNode.size.height / 2.0 {
+                bulletNode.removeFromParent()
                 
                 if game.bullets == 0 {
                     game.endGame()
@@ -256,30 +272,21 @@ public class Scene: SKScene, GameDelegate {
 
 extension Scene: SKPhysicsContactDelegate {
     public func didBeginContact(contact: SKPhysicsContact) {
-        let bulletBody: SKPhysicsBody = contact.bodyA.categoryBitMask == EntityType.Bullet.rawValue ? contact.bodyA : contact.bodyB
         let targetBody: SKPhysicsBody = contact.bodyA.categoryBitMask == EntityType.Target.rawValue ? contact.bodyA : contact.bodyB
         
-        if let bulletNode = bulletBody.node as? BulletNode {
-            var bullet = bulletNode.bullet
+        if !bulletNode.bullet.didHit {
+            bulletNode.bullet.hit()
             
-            if !bullet.didHit {
-                bullet.hit()
-                game.increaseScore()
-                
-                bulletNode.removeFromParent()
-                bulletNodes.remove(bulletNode)
-                
-                let index = currentPatternNodes.indexOf(targetBody.node as! TargetNode)!
-                currentPatternNodes.removeAtIndex(index)
-                targetBody.node?.removeFromParent()
-                
-                if currentPatternNodes.count == 0 {
-                    game.nextStage()
-                }
+            game.increaseScore()
+            
+            let index = currentPatternNodes.indexOf(targetBody.node as! TargetNode)!
+            currentPatternNodes.removeAtIndex(index)
+            targetBody.node?.removeFromParent()
+            
+            if currentPatternNodes.count == 0 {
+                game.nextStage()
             }
         }
-        
-        
     }
 }
 
