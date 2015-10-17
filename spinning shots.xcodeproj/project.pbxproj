@@ -41,6 +41,7 @@
 		B6D352CA1BC456B400498C8E /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D352C91BC456B400498C8E /* StyleKit.swift */; settings = {ASSET_TAGS = (); }; };
 		B6F540511BD1A42F00978E9F /* TargetNodeCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F540501BD1A42F00978E9F /* TargetNodeCreator.swift */; settings = {ASSET_TAGS = (); }; };
 		B6FC6A171BD2716900229584 /* InstanceCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC6A161BD2716900229584 /* InstanceCounter.swift */; settings = {ASSET_TAGS = (); }; };
+		B6FC6A1B1BD2D4EA00229584 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC6A1A1BD2D4EA00229584 /* Button.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		B6D352C91BC456B400498C8E /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		B6F540501BD1A42F00978E9F /* TargetNodeCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetNodeCreator.swift; sourceTree = "<group>"; };
 		B6FC6A161BD2716900229584 /* InstanceCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstanceCounter.swift; sourceTree = "<group>"; };
+		B6FC6A1A1BD2D4EA00229584 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				B6D3529E1BC4444D00498C8E /* Label.swift */,
+				B6FC6A1A1BD2D4EA00229584 /* Button.swift */,
 				B6D352C11BC4511900498C8E /* BackgroundNode.swift */,
 				B661ED181BC8293E006EF8A9 /* OvalBorderNode.swift */,
 			);
@@ -305,6 +308,7 @@
 				B6D352CA1BC456B400498C8E /* StyleKit.swift in Sources */,
 				B6FC6A171BD2716900229584 /* InstanceCounter.swift in Sources */,
 				B6D352B31BC44B9D00498C8E /* Bullet.swift in Sources */,
+				B6FC6A1B1BD2D4EA00229584 /* Button.swift in Sources */,
 				B6D352BC1BC44E7500498C8E /* Colors.swift in Sources */,
 				B6D3528F1BC43F0B00498C8E /* Scene.swift in Sources */,
 				B6D352A71BC445D500498C8E /* Constants.swift in Sources */,

@@ -30,4 +30,15 @@ extension StyleKit {
         return imageOfBullet
     }
     
+    public class func imageOfPlayButton(diameter diameter: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
+        StyleKit.drawPlayButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Stroke, buttonFrameDiameter: diameter)
+            drawBullet(frame: CGRectMake(0, 0, diameter, diameter), bulletColor: Colors.Bullet)
+        
+        let imageOfPlayButton = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return imageOfPlayButton
+    }
+    
 }
