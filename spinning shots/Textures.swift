@@ -16,6 +16,9 @@ public class Textures {
     public let Bullet: SKTexture
     
     public let PlayButton: SKTexture
+    public let HomeButton: SKTexture
+    public let ShareButton: SKTexture
+    public let GameCenterButton: SKTexture
     
     let sizes = Values.sharedValues.sizes
     
@@ -25,6 +28,9 @@ public class Textures {
         Bullet = SKTexture(image: StyleKit.imageOfBullet(size: sizes.Bullet))
         
         PlayButton = SKTexture(image: StyleKit.imageOfPlayButton(diameter: sizes.MenuButtonPlayDiameter))
+        HomeButton = SKTexture(image: StyleKit.imageOfHomeButton(diameter: sizes.GameOverButtonHomeDiameter))
+        ShareButton = SKTexture(image: StyleKit.imageOfShareButton(diameter: sizes.GameOverButtonShareDiameter))
+        GameCenterButton = SKTexture(image: StyleKit.imageOfGameCenterButton(diameter: sizes.GameOverButtonGameCenterDiameter))
         
         InstanceCountingInitInstance(self)
     }

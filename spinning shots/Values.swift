@@ -36,6 +36,9 @@ public struct Sizes {
     public let TargetThickness: CGFloat
     
     public let MenuButtonPlayDiameter: CGFloat
+    public let GameOverButtonHomeDiameter: CGFloat
+    public let GameOverButtonShareDiameter: CGFloat
+    public let GameOverButtonGameCenterDiameter: CGFloat
     
     public let PlayingScoreLabelSize: CGFloat
     
@@ -63,6 +66,10 @@ public struct Sizes {
         MenuButtonPlayDiameter = PlayingAreaDiameter * 0.4
         
         PlayingScoreLabelSize = PlayingAreaDiameter * 0.2
+
+        GameOverButtonHomeDiameter = PlayingAreaDiameter * 0.25
+        GameOverButtonShareDiameter = GameOverButtonHomeDiameter * 0.75
+        GameOverButtonGameCenterDiameter = GameOverButtonHomeDiameter * 0.75
     }
 }
 
