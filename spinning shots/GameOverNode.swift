@@ -12,7 +12,9 @@ public class GameOverNode: SKNode {
     private var sceneDelegate: SceneDelegate
     private var score: Int
     
-    private var tmpLabel: Label!
+    private var homeButton: Button!
+    private var shareButton: Button!
+    private var gamecenterButton: Button!
     
     private var isTransitionRunning = false
     
@@ -29,16 +31,32 @@ public class GameOverNode: SKNode {
     }
     
     private func setupUI() {
-        tmpLabel = Label(text: "Game Over!", fontSize: 24.0)
-        tmpLabel.name = "tmpLabel"
-        tmpLabel.position = Values.sharedValues.sizes.Screen.middle
-        tmpLabel.horizontalAlignmentMode = .Center
-        tmpLabel.verticalAlignmentMode = .Center
-        tmpLabel.alpha = 0.0
-        addChild(tmpLabel)
+        let positions = Values.sharedValues.positions
         
-        let fadeIn = SKAction.fadeInWithDuration(ActionDuration)
-        tmpLabel.runAction(fadeIn)
+        homeButton = Button(item: .Home)
+        homeButton.name = "homeButton"
+        homeButton.position = positions.GameOverHomeButton
+        homeButton.alpha = 0.0
+        homeButton.setScale(0.0)
+        addChild(homeButton)
+        
+        shareButton = Button(item: .Share)
+        shareButton.name = "shareButton"
+        shareButton.position = positions.GameOverShareButton
+        shareButton.alpha = 0.0
+        shareButton.setScale(0.0)
+        addChild(shareButton)
+        
+        gamecenterButton = Button(item: .GameCenter)
+        gamecenterButton.name = "gamecenterButton"
+        gamecenterButton.position = positions.GameOverGameCenterButton
+        gamecenterButton.alpha = 0.0
+        gamecenterButton.setScale(0.0)
+        addChild(gamecenterButton)
+
+        homeButton.runAction(SKAction.fadeInAndScaleUp(ActionDuration))
+        shareButton.runAction(SKAction.fadeInAndScaleUp(ActionDuration))
+        gamecenterButton.runAction(SKAction.fadeInAndScaleUp(ActionDuration))
     }
     
     public func close(withTargetState targetState: SceneState) {
@@ -48,7 +66,9 @@ public class GameOverNode: SKNode {
         let fadeOutAndPop = SKAction.group([fadeOut, SKAction.popAction])
         
         let groupAction = SKAction.group([
-            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: tmpLabel.name!)
+            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: homeButton.name!),
+            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: shareButton.name!),
+            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: gamecenterButton.name!)
             ])
         
         let sequenceAction = SKAction.sequence([
@@ -70,7 +90,17 @@ public class GameOverNode: SKNode {
     public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         guard !isTransitionRunning else { return }
         
-        close(withTargetState: .Menu)
+        let location = touches.first!.locationInNode(self)
+        
+        if CGRectContainsPoint(homeButton.frame, location) {
+            close(withTargetState: .Menu)
+        } else if CGRectContainsPoint(shareButton.frame, location) {
+            print("share")
+        } else if CGRectContainsPoint(gamecenterButton.frame, location) {
+            print("gameCenter")
+        } else {
+            InstanceCountingDumpInstances()
+        }
     }
     
     required public init?(coder aDecoder: NSCoder) {

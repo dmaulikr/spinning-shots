@@ -10,6 +10,9 @@ import SpriteKit
 
 public enum ButtonItem {
     case Play
+    case Home
+    case Share
+    case GameCenter
 }
 
 public class Button: SKSpriteNode {
@@ -29,6 +32,9 @@ public class Button: SKSpriteNode {
         let texture: SKTexture
         switch item {
         case .Play: texture = Textures.sharedTextures.PlayButton
+        case .Home: texture = Textures.sharedTextures.HomeButton
+        case .Share: texture = Textures.sharedTextures.ShareButton
+        case .GameCenter: texture = Textures.sharedTextures.GameCenterButton
         }
         return texture
     }
