@@ -32,12 +32,42 @@ extension StyleKit {
     
     public class func imageOfPlayButton(diameter diameter: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
-        drawPlayButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Stroke, buttonFrameDiameter: diameter)
+        drawPlayButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Target, buttonFrameDiameter: diameter)
         
         let imageOfPlayButton = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         return imageOfPlayButton
+    }
+    
+    public class func imageOfHomeButton(diameter diameter: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
+        drawHomeButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Target, buttonFrameDiameter: diameter)
+        
+        let imageOfHomeButton = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return imageOfHomeButton
+    }
+    
+    public class func imageOfShareButton(diameter diameter: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
+        drawShareButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Target, buttonFrameDiameter: diameter)
+        
+        let imageOfShareButton = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return imageOfShareButton
+    }
+    
+    public class func imageOfGameCenterButton(diameter diameter: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
+        drawGameCenterButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Target, buttonFrameDiameter: diameter)
+        
+        let imageOfGameCenterButton = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return imageOfGameCenterButton
     }
     
 }

@@ -36,6 +36,9 @@ public struct Sizes {
     public let TargetThickness: CGFloat
     
     public let MenuButtonPlayDiameter: CGFloat
+    public let GameOverButtonHomeDiameter: CGFloat
+    public let GameOverButtonShareDiameter: CGFloat
+    public let GameOverButtonGameCenterDiameter: CGFloat
     
     public let PlayingScoreLabelSize: CGFloat
     
@@ -63,6 +66,10 @@ public struct Sizes {
         MenuButtonPlayDiameter = PlayingAreaDiameter * 0.4
         
         PlayingScoreLabelSize = PlayingAreaDiameter * 0.2
+
+        GameOverButtonHomeDiameter = PlayingAreaDiameter * 0.25
+        GameOverButtonShareDiameter = GameOverButtonHomeDiameter * 0.75
+        GameOverButtonGameCenterDiameter = GameOverButtonHomeDiameter * 0.75
     }
 }
 
@@ -72,11 +79,22 @@ public struct Positions {
     public let Cannon: CGPoint
     public let CannonBullet: CGPoint
     
+    public let GameOverHomeButton: CGPoint
+    public let GameOverShareButton: CGPoint
+    public let GameOverGameCenterButton: CGPoint
+    
     private init(sizes: Sizes) {
         ScreenMiddle = sizes.Screen.middle
         OvalBorderNode = CGPoint(x: (sizes.Screen.width - sizes.BorderDiameter) / 2.0, y: sizes.Screen.middle.y - sizes.BorderDiameter / 2.0)
         Cannon = ScreenMiddle
         CannonBullet = CGPoint(x: Cannon.x, y: Cannon.y + sizes.Cannon.height * 0.33)
+        
+        let buttonBottomOffset: CGFloat = 32.0
+        let buttonBetweenOffset: CGFloat = sizes.GameOverButtonHomeDiameter / 2.0 + sizes.GameOverButtonShareDiameter / 2.0 + 16.0
+        let gameOverButtonPosY = sizes.GameOverButtonHomeDiameter / 2.0 + buttonBottomOffset
+        GameOverHomeButton = CGPoint(x: ScreenMiddle.x, y: gameOverButtonPosY)
+        GameOverShareButton = CGPoint(x: GameOverHomeButton.x - buttonBetweenOffset, y: gameOverButtonPosY)
+        GameOverGameCenterButton = CGPoint(x: GameOverHomeButton.x + buttonBetweenOffset, y: gameOverButtonPosY)
     }
 }
 
