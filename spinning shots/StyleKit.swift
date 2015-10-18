@@ -224,8 +224,6 @@ public class StyleKit : NSObject {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()
 
-        //// Color Declarations
-        let fillColor = UIColor(red: 0.322, green: 0.380, blue: 0.420, alpha: 1.000)
 
         //// Variable Declarations
         let buttonStrokeWidth: CGFloat = buttonFrameDiameter * 0.02
@@ -316,7 +314,7 @@ public class StyleKit : NSObject {
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(rect: CGRectMake(group3.minX + floor(group3.width * -0.10741 + 0.49) + 0.01, group3.minY + floor(group3.height * -0.08537 - 0.49) + 0.99, floor(group3.width * 1.10741 - 0.26) - floor(group3.width * -0.10741 + 0.49) + 0.75, floor(group3.height * 1.08537 + 0.06) - floor(group3.height * -0.08537 - 0.49) - 0.55))
-        fillColor.setFill()
+        buttonStrokeColor.setFill()
         rectanglePath.fill()
 
 

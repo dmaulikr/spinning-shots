@@ -32,7 +32,7 @@ extension StyleKit {
     
     public class func imageOfPlayButton(diameter diameter: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
-        drawPlayButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Stroke, buttonFrameDiameter: diameter)
+        drawPlayButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Target, buttonFrameDiameter: diameter)
         
         let imageOfPlayButton = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -42,7 +42,7 @@ extension StyleKit {
     
     public class func imageOfHomeButton(diameter diameter: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
-        drawHomeButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Stroke, buttonFrameDiameter: diameter)
+        drawHomeButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Target, buttonFrameDiameter: diameter)
         
         let imageOfHomeButton = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -52,7 +52,7 @@ extension StyleKit {
     
     public class func imageOfShareButton(diameter diameter: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
-        drawShareButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Stroke, buttonFrameDiameter: diameter)
+        drawShareButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Target, buttonFrameDiameter: diameter)
         
         let imageOfShareButton = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -62,7 +62,7 @@ extension StyleKit {
     
     public class func imageOfGameCenterButton(diameter diameter: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
-        drawGameCenterButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Stroke, buttonFrameDiameter: diameter)
+        drawGameCenterButton(buttonFillColor: Colors.Cannon, buttonStrokeColor: Colors.Target, buttonFrameDiameter: diameter)
         
         let imageOfGameCenterButton = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
