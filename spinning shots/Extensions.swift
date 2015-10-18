@@ -52,6 +52,12 @@ extension SKAction {
         let scaleDown = SKAction.scaleTo(1.0, duration: scaleDownDuration)
         return SKAction.sequence([scaleUp, scaleDown])
     }
+    
+    static func fadeInAndScaleUp(duration: NSTimeInterval) -> SKAction {
+        let fadeIn = SKAction.fadeAlphaTo(1.0, duration: duration)
+        let scaleUp = SKAction.scaleTo(1.0, duration: duration)
+        return SKAction.group([fadeIn, scaleUp])
+    }
 }
 
 extension UIColor {

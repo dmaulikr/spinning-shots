@@ -100,10 +100,9 @@ public class Scene: SKScene, GameDelegate {
     }
     
     public func startNewGame() {
-        initCannonNode()
-        initBulletNode()
-        
-        game.startNewGame()
+        initNewGame(completion: {
+            self.game.startNewGame()
+        })
     }
     
     private func initObjectsNode() {
@@ -123,16 +122,30 @@ public class Scene: SKScene, GameDelegate {
         objectsNode.addChild(rotationNode)
     }
     
-    private func initCannonNode() {
+    private func initNewGame(completion completion: () -> Void) {
         cannonNode = CannonNode()
+        cannonNode.alpha = 0.0
+        cannonNode.setScale(0.0)
         cannonNode.position = positions.Cannon
         objectsNode.addChild(cannonNode)
-    }
-    
-    private func initBulletNode() {
+        
         bulletNode = BulletNode()
-        bulletNode.position = positions.CannonBullet
-        objectsNode.addChild(bulletNode)
+        bulletNode.position = positions.Cannon
+        
+        let cannonAction = SKAction.fadeInAndScaleUp(ActionDuration)
+        let bulletAction = SKAction.moveTo(positions.CannonBullet, duration: ActionDuration / 3.0)
+        
+        let totalInitDuration = cannonAction.duration + bulletAction.duration
+        
+        cannonNode.runAction(cannonAction) {
+            self.objectsNode.addChild(self.bulletNode)
+            self.bulletNode.runAction(bulletAction)
+        }
+        
+        runAction(SKAction.sequence([
+            SKAction.waitForDuration(totalInitDuration),
+            SKAction.runBlock(completion)
+            ]))
     }
     
     private func initPhysics() {
@@ -181,24 +194,26 @@ public class Scene: SKScene, GameDelegate {
         guard isGameRunning else { return }
         
         game.tick(dt)
+        reloadBulletIfNeeded()
         moveBullets(dt)
     }
     
-    private func moveBullets(dt: NSTimeInterval) {
+    private func reloadBulletIfNeeded() {
         if shouldReloadBulletOnNextUpdate {
             shouldReloadBulletOnNextUpdate = false
             bulletNode.position = positions.Cannon
             
+            bulletNode.bullet.reload()
+            
             let move = SKAction.moveTo(positions.CannonBullet, duration: ActionDuration / 3.0)
-            let block = SKAction.runBlock {
-                self.bulletNode.bullet.reload()
-            }
-            let sequence = SKAction.sequence([move, block])
-            bulletNode.runAction(sequence)
+            bulletNode.runAction(move)
         }
-        
+    }
+    
+    private func moveBullets(dt: NSTimeInterval) {
         if bulletNode.bullet.wasShot {
             bulletNode.moveBy(CGPoint(x: 0, y: speeds.Bullet), dt: dt)
+            
             if bulletNode.position.y > positions.ScreenMiddle.y + sizes.PlayingAreaDiameter / 2.0 - bulletNode.size.height / 2.0 {
                 bulletNode.removeFromParent()
                 
@@ -221,7 +236,7 @@ public class Scene: SKScene, GameDelegate {
         case .Menu: menuNode?.touchesBegan(touches, withEvent: event)
         case .Playing:
             playingNode?.touchesBegan(touches, withEvent: event)
-            shootBullet()
+            if isGameRunning { shootBullet() }
         case .GameOver: gameOverNode?.touchesBegan(touches, withEvent: event)
         }
     }
