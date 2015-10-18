@@ -60,7 +60,7 @@ public struct Sizes {
         
         TargetThickness = cannonHeight * 0.5
         
-        MenuButtonPlayDiameter = PlayingAreaDiameter * 0.2
+        MenuButtonPlayDiameter = PlayingAreaDiameter * 0.4
         
         PlayingScoreLabelSize = PlayingAreaDiameter * 0.2
     }
