@@ -294,14 +294,68 @@ extension Scene: SKPhysicsContactDelegate {
             
             game.increaseScore()
             
+            let targetNode = targetBody.node as? TargetNode
+            //boom(CGPoint(x: bulletNode.position.x, y: bulletNode.position.y + sizes.TargetThickness / 2.0))
+            targetNode?.removeFromParent()
+            
             let index = currentPatternNodes.indexOf(targetBody.node as! TargetNode)!
             currentPatternNodes.removeAtIndex(index)
-            targetBody.node?.removeFromParent()
             
             if currentPatternNodes.count == 0 {
                 game.nextStage()
             }
         }
+    }
+    
+    func boom(boomPosition: CGPoint) {
+        var boomCells = [SKSpriteNode]()
+        let shapeSize: CGFloat = 12.0
+        
+        for _ in 0...16 {
+            for _ in 0...16 {
+                let shape =  SKSpriteNode(color: Colors.Target, size: CGSize(width: shapeSize, height: shapeSize))
+                shape.zPosition = 100
+                objectsNode.addChild(shape)
+                boomCells.append(shape)
+            }
+        }
+        
+        for shape in boomCells {
+            shape.position = boomPosition
+            shape.alpha = 1.0
+            
+            let path = makeRandomPath(shape)
+            let scale = makeScaleValue()
+            let duration = (NSTimeInterval(random() % 5) * 0.05 + 0.15)
+            
+            let moveAnimation = SKAction.followPath(path, duration: duration)
+            let scaleAnimation = SKAction.scaleTo(scale, duration: duration)
+            let fadeAnimation = SKAction.fadeAlphaTo(0.0, duration: duration)
+            let groupAnimation = SKAction.group([moveAnimation, scaleAnimation, fadeAnimation])
+            let shapeAnimation = SKAction.sequence([groupAnimation])
+            
+            shape.runAction(shapeAnimation)
+        }
+    }
+    
+    func makeRandomPath(shape: SKSpriteNode) -> CGPath {
+        let path = UIBezierPath()
+        
+        path.moveToPoint(CGPoint(x: 0.0, y: 0.0))
+        let basicLeft = -CGFloat(1.3 * shape.frame.size.width)
+        let maxOffset = 3 * abs(basicLeft)
+        let randomNumber = random() % 101
+        let endPointX = basicLeft + maxOffset * (CGFloat(randomNumber)/CGFloat(100)) //+ shape.position.x
+        let controlPointOffSetX = (endPointX /*- shape.position.x*/)/2  //+ shape.position.x
+        let controlPointOffSetY = /*shape.position.y*/ -0.2 * shape.frame.size.height - CGFloat(random()%Int(1.2 * shape.frame.size.height))
+        let endPointY = /*shape.position.y +*/ shape.frame.size.height/2 + CGFloat(random()%Int(shape.frame.size.height/2))
+        path.addQuadCurveToPoint(CGPointMake(endPointX, endPointY), controlPoint: CGPointMake(controlPointOffSetX, controlPointOffSetY))
+        
+        return path.CGPath
+    }
+    
+    func makeScaleValue() -> CGFloat {
+        return 1 - 0.7 * (CGFloat(random()%101 - 50)/CGFloat(50))
     }
 }
 
