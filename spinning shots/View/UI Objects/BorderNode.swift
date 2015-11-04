@@ -1,5 +1,5 @@
 //
-//  OvalBorderNode.swift
+//  BorderNode.swift
 //  spinning shots
 //
 //  Created by Marc Zobec on 2015-10-09.
@@ -11,7 +11,7 @@ import SpriteKit
 /**
  Border node for the playing area.
  */
-public class OvalBorderNode: SKShapeNode {
+public class BorderNode: SKShapeNode {
     
     /**
      Create a border node.

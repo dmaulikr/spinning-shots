@@ -28,7 +28,7 @@
 		B609BC1A1BE939B400C12CAA /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC151BE939B400C12CAA /* ButtonNode.swift */; };
 		B609BC1B1BE939B400C12CAA /* LabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC161BE939B400C12CAA /* LabelNode.swift */; };
 		B609BC1C1BE939B400C12CAA /* LineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC171BE939B400C12CAA /* LineNode.swift */; };
-		B609BC1D1BE939B400C12CAA /* OvalBorderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC181BE939B400C12CAA /* OvalBorderNode.swift */; };
+		B609BC1D1BE939B400C12CAA /* BorderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC181BE939B400C12CAA /* BorderNode.swift */; };
 		B609BC281BE939C100C12CAA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC1E1BE939C100C12CAA /* Colors.swift */; };
 		B609BC291BE939C100C12CAA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC1F1BE939C100C12CAA /* Constants.swift */; };
 		B609BC2A1BE939C100C12CAA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC201BE939C100C12CAA /* Extensions.swift */; };
@@ -66,7 +66,7 @@
 		B609BC151BE939B400C12CAA /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonNode.swift; path = "View/UI Objects/ButtonNode.swift"; sourceTree = "<group>"; };
 		B609BC161BE939B400C12CAA /* LabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LabelNode.swift; path = "View/UI Objects/LabelNode.swift"; sourceTree = "<group>"; };
 		B609BC171BE939B400C12CAA /* LineNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineNode.swift; path = "View/UI Objects/LineNode.swift"; sourceTree = "<group>"; };
-		B609BC181BE939B400C12CAA /* OvalBorderNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OvalBorderNode.swift; path = "View/UI Objects/OvalBorderNode.swift"; sourceTree = "<group>"; };
+		B609BC181BE939B400C12CAA /* BorderNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BorderNode.swift; path = "View/UI Objects/BorderNode.swift"; sourceTree = "<group>"; };
 		B609BC1E1BE939C100C12CAA /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = API/Colors.swift; sourceTree = "<group>"; };
 		B609BC1F1BE939C100C12CAA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = API/Constants.swift; sourceTree = "<group>"; };
 		B609BC201BE939C100C12CAA /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = API/Extensions.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 				B609BC151BE939B400C12CAA /* ButtonNode.swift */,
 				B609BC161BE939B400C12CAA /* LabelNode.swift */,
 				B609BC171BE939B400C12CAA /* LineNode.swift */,
-				B609BC181BE939B400C12CAA /* OvalBorderNode.swift */,
+				B609BC181BE939B400C12CAA /* BorderNode.swift */,
 			);
 			name = "UI Objects";
 			sourceTree = "<group>";
@@ -337,7 +337,7 @@
 				B609BC131BE939A800C12CAA /* PlayingNode.swift in Sources */,
 				B609BC001BE9397E00C12CAA /* Cannon.swift in Sources */,
 				B609BC1A1BE939B400C12CAA /* ButtonNode.swift in Sources */,
-				B609BC1D1BE939B400C12CAA /* OvalBorderNode.swift in Sources */,
+				B609BC1D1BE939B400C12CAA /* BorderNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
