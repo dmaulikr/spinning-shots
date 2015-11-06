@@ -72,7 +72,7 @@ public class Game {
      */
     public func shootBullet() {
         bullets--
-        
+
         gameDelegate?.gameDidChangeAmountOfBullets(-1, totalAmount: bullets)
     }
     
@@ -90,7 +90,7 @@ public class Game {
      */
     public func nextStage() {
         stage++
-        
+
         gameDelegate?.gameDidProceedToStage(stage)
     }
     

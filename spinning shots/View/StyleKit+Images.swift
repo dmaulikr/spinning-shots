@@ -10,6 +10,16 @@ import UIKit
 
 extension StyleKit {
     
+    public class func imageOfBorder(diameter diameter: CGFloat, strokeWidth: CGFloat, isFullCircle: Bool) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
+        drawBorder(borderStrokeColor: Colors.Stroke, borderDiameter: diameter, borderStrokeWidth: strokeWidth, isBorderFullCircle: isFullCircle)
+        
+        let imageOfBorder = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return imageOfBorder
+    }
+    
     public class func imageOfCannon(size size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         drawCannon(frame: CGRectMake(0, 0, size.width, size.height), cannonColor: Colors.Cannon, cannonStrokeColor: Colors.Stroke)

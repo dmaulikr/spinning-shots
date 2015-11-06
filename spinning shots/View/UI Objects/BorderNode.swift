@@ -10,25 +10,61 @@ import SpriteKit
 
 /**
  Border node for the playing area.
+ 
+ Can be toggled to be either a full circle, or a half circle.
  */
-public class BorderNode: SKShapeNode {
+public class BorderNode: SKSpriteNode {
+    
+    private(set) public var isFullCircle: Bool
+    
+    private var upperHalf: ArcNode!
+    private var lowerHalf: ArcNode!
     
     /**
      Create a border node.
-     - parameter diameter: diameter of the circle
-     - parameter strokeWidth: width of the stroke
      */
-    public init(diameter: CGFloat, strokeWidth: CGFloat) {
-        super.init()
+    public init(isFullCircle: Bool) {
+        self.isFullCircle = isFullCircle
         
-        // draw the circle
-        let radius = diameter - strokeWidth
-        let rect = CGRect(origin: CGPoint(x: strokeWidth / 2.0, y: strokeWidth / 2.0), size: CGSize(diameter: radius))
-        path = CGPathCreateWithEllipseInRect(rect, nil)
-        strokeColor = Colors.Target
-        lineWidth = strokeWidth
+        let sizes = Values.sharedValues.sizes
+        
+        super.init(texture: nil, color: Colors.Background, size: CGSize(diameter: sizes.BorderDiameter))
+        
+        let thickness = sizes.BorderStrokeWidth
+        upperHalf = createArcNode(thickness: thickness)
+        lowerHalf = createArcNode(thickness: thickness, rotated: true)
+        
+        addChild(upperHalf)
+        addChild(lowerHalf)
         
         zPosition = ZPositions.OvalBorder
+    }
+    
+    private func createArcNode(thickness thickness: CGFloat, rotated: Bool = false) -> ArcNode {
+        let rotation: CGFloat = 90.0 + (rotated ? 180 : 0.0 )
+        let degrees: CGFloat = 180.0
+        
+        let arcNode = ArcNode(rotation: rotation, degrees: degrees, thickness: thickness, inRectWithDiameter: size.width)
+        
+        return arcNode
+    }
+    
+    public func toggleTransformation(animated animated: Bool = true) {
+        isFullCircle = !isFullCircle
+        
+        if isFullCircle {
+            addChild(lowerHalf)
+        }
+        
+        if animated {
+            lowerHalf.runAction(SKAction.rotateByAngle(CGFloat(M_PI), duration: ActionDuration)) {
+                if !self.isFullCircle {
+                    self.lowerHalf.removeFromParent()
+                }
+            }
+        } else if !isFullCircle {
+            lowerHalf.removeFromParent()
+        }
     }
     
     public required init?(coder aDecoder: NSCoder) {

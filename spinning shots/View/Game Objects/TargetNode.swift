@@ -11,14 +11,10 @@ import SpriteKit
 /**
  Visual representation of a target entity.
  */
-public class TargetNode: SKShapeNode {
+public class TargetNode: ArcNode {
     
     public var target: Target
     public var shouldRotate: Bool
-    
-    private let startAngle: CGFloat
-    private let endAngle: CGFloat
-    private let radius: CGFloat
     
     /**
      Create a target node.
@@ -30,17 +26,7 @@ public class TargetNode: SKShapeNode {
         self.target = target
         self.shouldRotate = false
         
-        self.radius = diameter / 2.0 - thickness / 2.0
-        
-        // calculate the start and end angles for the node according to the target's rotation
-        self.startAngle = (0.0 + target.rotation - target.degrees / 2.0) * CGFloat(M_PI)/180
-        self.endAngle = (target.degrees + target.rotation - target.degrees / 2.0) * CGFloat(M_PI)/180
-        
-        super.init()
-        path = UIBezierPath(arcCenter: CGPoint.zero, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true).CGPath
-        
-        strokeColor = Colors.Target
-        lineWidth = thickness
+        super.init(rotation: target.rotation, degrees: target.degrees, thickness: thickness, inRectWithDiameter: diameter)
         
         
         // create a  physicsBody for the collision detection
