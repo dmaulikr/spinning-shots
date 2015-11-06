@@ -16,6 +16,9 @@ import SpriteKit
 public class Textures {
     public static let sharedTextures = Textures()
     
+    public let Border: SKTexture
+    public let BorderHalf: SKTexture
+    
     public let Cannon: SKTexture
     public let Bullet: SKTexture
     
@@ -30,6 +33,9 @@ public class Textures {
      Load the textures.
      */
     init() {
+        Border = SKTexture(image: StyleKit.imageOfBorder(diameter: sizes.BorderDiameter, strokeWidth: sizes.BorderStrokeWidth, isFullCircle: true))
+        BorderHalf = SKTexture(image: StyleKit.imageOfBorder(diameter: sizes.BorderDiameter, strokeWidth: sizes.BorderStrokeWidth, isFullCircle: false))
+        
         Cannon = SKTexture(image: StyleKit.imageOfCannon(size: sizes.Cannon))
         Bullet = SKTexture(image: StyleKit.imageOfBullet(size: sizes.Bullet))
         

@@ -28,7 +28,7 @@
 		B609BC1A1BE939B400C12CAA /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC151BE939B400C12CAA /* ButtonNode.swift */; };
 		B609BC1B1BE939B400C12CAA /* LabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC161BE939B400C12CAA /* LabelNode.swift */; };
 		B609BC1C1BE939B400C12CAA /* LineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC171BE939B400C12CAA /* LineNode.swift */; };
-		B609BC1D1BE939B400C12CAA /* OvalBorderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC181BE939B400C12CAA /* OvalBorderNode.swift */; };
+		B609BC1D1BE939B400C12CAA /* BorderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC181BE939B400C12CAA /* BorderNode.swift */; };
 		B609BC281BE939C100C12CAA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC1E1BE939C100C12CAA /* Colors.swift */; };
 		B609BC291BE939C100C12CAA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC1F1BE939C100C12CAA /* Constants.swift */; };
 		B609BC2A1BE939C100C12CAA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC201BE939C100C12CAA /* Extensions.swift */; };
@@ -39,6 +39,7 @@
 		B609BC2F1BE939C100C12CAA /* Textures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC251BE939C100C12CAA /* Textures.swift */; };
 		B609BC301BE939C100C12CAA /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC261BE939C100C12CAA /* Values.swift */; };
 		B609BC311BE939C100C12CAA /* ZPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC271BE939C100C12CAA /* ZPositions.swift */; };
+		B6BED82A1BEAA2EB002BF57A /* ArcNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BED8291BEAA2EB002BF57A /* ArcNode.swift */; };
 		B6D3527F1BC42BD800498C8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6D3527D1BC42BD800498C8E /* Main.storyboard */; };
 		B6D352811BC42BD800498C8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6D352801BC42BD800498C8E /* Assets.xcassets */; };
 		B6D352841BC42BD800498C8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6D352821BC42BD800498C8E /* LaunchScreen.storyboard */; };
@@ -66,7 +67,7 @@
 		B609BC151BE939B400C12CAA /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonNode.swift; path = "View/UI Objects/ButtonNode.swift"; sourceTree = "<group>"; };
 		B609BC161BE939B400C12CAA /* LabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LabelNode.swift; path = "View/UI Objects/LabelNode.swift"; sourceTree = "<group>"; };
 		B609BC171BE939B400C12CAA /* LineNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineNode.swift; path = "View/UI Objects/LineNode.swift"; sourceTree = "<group>"; };
-		B609BC181BE939B400C12CAA /* OvalBorderNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OvalBorderNode.swift; path = "View/UI Objects/OvalBorderNode.swift"; sourceTree = "<group>"; };
+		B609BC181BE939B400C12CAA /* BorderNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BorderNode.swift; path = "View/UI Objects/BorderNode.swift"; sourceTree = "<group>"; };
 		B609BC1E1BE939C100C12CAA /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = API/Colors.swift; sourceTree = "<group>"; };
 		B609BC1F1BE939C100C12CAA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = API/Constants.swift; sourceTree = "<group>"; };
 		B609BC201BE939C100C12CAA /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = API/Extensions.swift; sourceTree = "<group>"; };
@@ -77,6 +78,7 @@
 		B609BC251BE939C100C12CAA /* Textures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Textures.swift; path = API/Textures.swift; sourceTree = "<group>"; };
 		B609BC261BE939C100C12CAA /* Values.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Values.swift; path = API/Values.swift; sourceTree = "<group>"; };
 		B609BC271BE939C100C12CAA /* ZPositions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZPositions.swift; path = API/ZPositions.swift; sourceTree = "<group>"; };
+		B6BED8291BEAA2EB002BF57A /* ArcNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcNode.swift; sourceTree = "<group>"; };
 		B6D352721BC42BD700498C8E /* spinning shots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "spinning shots.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6D3527E1BC42BD800498C8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B6D352801BC42BD800498C8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -186,7 +188,7 @@
 				B609BC151BE939B400C12CAA /* ButtonNode.swift */,
 				B609BC161BE939B400C12CAA /* LabelNode.swift */,
 				B609BC171BE939B400C12CAA /* LineNode.swift */,
-				B609BC181BE939B400C12CAA /* OvalBorderNode.swift */,
+				B609BC181BE939B400C12CAA /* BorderNode.swift */,
 			);
 			name = "UI Objects";
 			sourceTree = "<group>";
@@ -231,6 +233,7 @@
 				B609BC081BE9399C00C12CAA /* BulletNode.swift */,
 				B609BC091BE9399C00C12CAA /* CannonNode.swift */,
 				B609BC0A1BE9399C00C12CAA /* TargetNode.swift */,
+				B6BED8291BEAA2EB002BF57A /* ArcNode.swift */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 			files = (
 				B609BC111BE939A800C12CAA /* GameOverNode.swift in Sources */,
 				B609BC2B1BE939C100C12CAA /* GameCenterManager.swift in Sources */,
+				B6BED82A1BEAA2EB002BF57A /* ArcNode.swift in Sources */,
 				B609BC281BE939C100C12CAA /* Colors.swift in Sources */,
 				B609BC121BE939A800C12CAA /* MenuNode.swift in Sources */,
 				B609BC021BE9397E00C12CAA /* Target.swift in Sources */,
@@ -337,7 +341,7 @@
 				B609BC131BE939A800C12CAA /* PlayingNode.swift in Sources */,
 				B609BC001BE9397E00C12CAA /* Cannon.swift in Sources */,
 				B609BC1A1BE939B400C12CAA /* ButtonNode.swift in Sources */,
-				B609BC1D1BE939B400C12CAA /* OvalBorderNode.swift in Sources */,
+				B609BC1D1BE939B400C12CAA /* BorderNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

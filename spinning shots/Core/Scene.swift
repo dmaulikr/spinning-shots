@@ -53,7 +53,7 @@ public class Scene: SKScene {
     private var dt: NSTimeInterval = 0.0                // indicates the time delta between now and the last update
     
     private var backgroundNode: BackgroundNode!         // background of the scene
-    private var borderNode: OvalBorderNode!             // border of the playing area
+    private var borderNode: BorderNode!             // border of the playing area
     private var collisionLineNode: LineNode!                     // invisible, used for collision detection
     
     private var rotationNode: SKNode!                   // holds all game objects that should rotate
@@ -202,9 +202,9 @@ public class Scene: SKScene {
      Create the border node and add it to the objects node.
      */
     private func setupBorderNode() {
-        borderNode = OvalBorderNode(diameter: sizes.BorderDiameter, strokeWidth: sizes.BorderStrokeWidth)
+        borderNode = BorderNode(isFullCircle: true)
         borderNode.alpha = 0.0
-        borderNode.position = positions.OvalBorderNode
+        borderNode.position = positions.ScreenMiddle
         objectsNode.addChild(borderNode)
     }
     
@@ -408,6 +408,7 @@ extension Scene: GameDelegate {
         } else {
             objectsNode.addChild(collisionLineNode)
         }
+        borderNode.toggleTransformation()
         
         // load pattern for next stage
         let pattern = TargetNodeCreator.patternForStage(stage)
@@ -481,6 +482,7 @@ extension Scene: SKPhysicsContactDelegate {
             // - flip rotation direction
             // - reset collision line node
         else if isMarkerCollision {
+            print("marker")
             let markerBody: SKPhysicsBody = contact.bodyA.categoryBitMask == EntityType.CollisionMarker.rawValue ? contact.bodyA : contact.bodyB
             
             // had problems with the collision being called out multiple times, so I

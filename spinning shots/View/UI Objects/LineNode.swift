@@ -56,7 +56,7 @@ public class LineNode: SKShapeNode {
         super.init()
         
         path = linePath
-        strokeColor = Colors.Clear
+        strokeColor = .redColor()//Colors.Clear
         lineWidth = 2.0
         
         // create the physics body for the collision detection
