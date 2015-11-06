@@ -39,11 +39,23 @@
 		B609BC2F1BE939C100C12CAA /* Textures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC251BE939C100C12CAA /* Textures.swift */; };
 		B609BC301BE939C100C12CAA /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC261BE939C100C12CAA /* Values.swift */; };
 		B609BC311BE939C100C12CAA /* ZPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609BC271BE939C100C12CAA /* ZPositions.swift */; };
+		B6809AF81BED4FCE0061C0C0 /* spinning_shots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6809AF71BED4FCE0061C0C0 /* spinning_shots_UITests.swift */; };
+		B6809B001BED4FE20061C0C0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6809AFF1BED4FE20061C0C0 /* SnapshotHelper.swift */; };
 		B6BED82A1BEAA2EB002BF57A /* ArcNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BED8291BEAA2EB002BF57A /* ArcNode.swift */; };
 		B6D3527F1BC42BD800498C8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6D3527D1BC42BD800498C8E /* Main.storyboard */; };
 		B6D352811BC42BD800498C8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6D352801BC42BD800498C8E /* Assets.xcassets */; };
 		B6D352841BC42BD800498C8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6D352821BC42BD800498C8E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B6809AFA1BED4FCE0061C0C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6D3526A1BC42BD700498C8E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B6D352711BC42BD700498C8E;
+			remoteInfo = "spinning shots";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B609BBF21BE9396600C12CAA /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = Core/Game.swift; sourceTree = "<group>"; };
@@ -78,6 +90,10 @@
 		B609BC251BE939C100C12CAA /* Textures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Textures.swift; path = API/Textures.swift; sourceTree = "<group>"; };
 		B609BC261BE939C100C12CAA /* Values.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Values.swift; path = API/Values.swift; sourceTree = "<group>"; };
 		B609BC271BE939C100C12CAA /* ZPositions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZPositions.swift; path = API/ZPositions.swift; sourceTree = "<group>"; };
+		B6809AF51BED4FCE0061C0C0 /* spinning shots UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "spinning shots UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6809AF71BED4FCE0061C0C0 /* spinning_shots_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spinning_shots_UITests.swift; sourceTree = "<group>"; };
+		B6809AF91BED4FCE0061C0C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6809AFF1BED4FE20061C0C0 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		B6BED8291BEAA2EB002BF57A /* ArcNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcNode.swift; sourceTree = "<group>"; };
 		B6D352721BC42BD700498C8E /* spinning shots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "spinning shots.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6D3527E1BC42BD800498C8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,6 +103,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B6809AF21BED4FCE0061C0C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B6D3526F1BC42BD700498C8E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -97,11 +120,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B6809AF61BED4FCE0061C0C0 /* spinning shots UITests */ = {
+			isa = PBXGroup;
+			children = (
+				B6809AFF1BED4FE20061C0C0 /* SnapshotHelper.swift */,
+				B6809AF71BED4FCE0061C0C0 /* spinning_shots_UITests.swift */,
+				B6809AF91BED4FCE0061C0C0 /* Info.plist */,
+			);
+			path = "spinning shots UITests";
+			sourceTree = "<group>";
+		};
 		B6D352691BC42BD700498C8E = {
 			isa = PBXGroup;
 			children = (
 				B6D352741BC42BD700498C8E /* spinning shots */,
 				B6D352971BC43F9900498C8E /* Supporting Files */,
+				B6809AF61BED4FCE0061C0C0 /* spinning shots UITests */,
 				B6D352731BC42BD700498C8E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -110,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				B6D352721BC42BD700498C8E /* spinning shots.app */,
+				B6809AF51BED4FCE0061C0C0 /* spinning shots UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -241,6 +276,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B6809AF41BED4FCE0061C0C0 /* spinning shots UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6809AFE1BED4FCE0061C0C0 /* Build configuration list for PBXNativeTarget "spinning shots UITests" */;
+			buildPhases = (
+				B6809AF11BED4FCE0061C0C0 /* Sources */,
+				B6809AF21BED4FCE0061C0C0 /* Frameworks */,
+				B6809AF31BED4FCE0061C0C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B6809AFB1BED4FCE0061C0C0 /* PBXTargetDependency */,
+			);
+			name = "spinning shots UITests";
+			productName = "spinning shots UITests";
+			productReference = B6809AF51BED4FCE0061C0C0 /* spinning shots UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B6D352711BC42BD700498C8E /* spinning shots */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B6D352881BC42BD800498C8E /* Build configuration list for PBXNativeTarget "spinning shots" */;
@@ -264,9 +317,14 @@
 		B6D3526A1BC42BD700498C8E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Marc Zobec";
 				TargetAttributes = {
+					B6809AF41BED4FCE0061C0C0 = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = B6D352711BC42BD700498C8E;
+					};
 					B6D352711BC42BD700498C8E = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = W25FGWT9GF;
@@ -287,11 +345,19 @@
 			projectRoot = "";
 			targets = (
 				B6D352711BC42BD700498C8E /* spinning shots */,
+				B6809AF41BED4FCE0061C0C0 /* spinning shots UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B6809AF31BED4FCE0061C0C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B6D352701BC42BD700498C8E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -305,6 +371,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B6809AF11BED4FCE0061C0C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6809AF81BED4FCE0061C0C0 /* spinning_shots_UITests.swift in Sources */,
+				B6809B001BED4FE20061C0C0 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B6D3526E1BC42BD700498C8E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,6 +422,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B6809AFB1BED4FCE0061C0C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B6D352711BC42BD700498C8E /* spinning shots */;
+			targetProxy = B6809AFA1BED4FCE0061C0C0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		B6D3527D1BC42BD800498C8E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -367,6 +450,33 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B6809AFC1BED4FCE0061C0C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = "spinning shots UITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.marczobec.spinning-shots-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "spinning shots";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		B6809AFD1BED4FCE0061C0C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "spinning shots UITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.marczobec.spinning-shots-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "spinning shots";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 		B6D352861BC42BD800498C8E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -482,6 +592,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B6809AFE1BED4FCE0061C0C0 /* Build configuration list for PBXNativeTarget "spinning shots UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6809AFC1BED4FCE0061C0C0 /* Debug */,
+				B6809AFD1BED4FCE0061C0C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		B6D3526D1BC42BD700498C8E /* Build configuration list for PBXProject "spinning shots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
