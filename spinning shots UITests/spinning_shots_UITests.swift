@@ -23,7 +23,6 @@ class spinning_shots_UITests: XCTestCase {
         app.launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-        snapshot("foo")
     }
     
     override func tearDown() {
@@ -34,6 +33,13 @@ class spinning_shots_UITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        snapshot("Menu")
+        
+        let element = XCUIApplication().childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
+        element.tap()
+        
+        snapshot("Playing")
     }
     
 }
