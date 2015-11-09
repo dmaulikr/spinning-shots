@@ -39,18 +39,4 @@ public class TargetNodeCreator {
         return targetNodes
     }
     
-    /**
-     Create a pattern of targets for a game stage.
-     - parameter stage: game stage
-     - returns: pattern of targets
-     */
-    public static func patternForStage(stage: Int) -> TargetPattern {
-        // TODO: tweak values
-        if stage % 2 == 1 { // TODO: should be anchored in core game logic directly
-            return TargetPattern(targetCount: stage + 2, gap: 15 * (1 + CGFloat(stage) / 10.0))
-        } else {
-            return TargetPattern(targetCount: 1, targetSize: 30.0 / (1 + CGFloat(stage) / 10.0))
-        }
-    }
-    
 }

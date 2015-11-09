@@ -161,7 +161,7 @@ public class Scene: SKScene {
         let cannonAction = SKAction.fadeInAndScaleUp(ActionDuration)
         let bulletAction = SKAction.moveTo(positions.CannonBullet, duration: ActionDuration / 3.0)
         
-        borderNode.runAction(SKAction.fadeAlphaTo(0.25, duration: ActionDuration))
+        borderNode.runAction(SKAction.fadeAlphaTo(1.0, duration: ActionDuration))
         cannonNode.runAction(cannonAction) {
             self.objectsNode.addChild(self.bulletNode)
             self.bulletNode.runAction(bulletAction)
@@ -202,7 +202,7 @@ public class Scene: SKScene {
      Create the border node and add it to the objects node.
      */
     private func setupBorderNode() {
-        borderNode = BorderNode(isFullCircle: true)
+        borderNode = BorderNode(gameStageStyle: game.stageStyle)
         borderNode.alpha = 0.0
         borderNode.position = positions.ScreenMiddle
         objectsNode.addChild(borderNode)
@@ -307,7 +307,8 @@ public class Scene: SKScene {
         // rotate each of the current nodes where shouldRotate is set to true
         for targetNode in currentPatternNodes where targetNode.shouldRotate == true {
             let direction = CGFloat(rotationDirection.rawValue)
-            targetNode.zRotation += CGFloat(dt) * speeds.Target * direction
+            let realSpeed = speeds.Target * game.speedMultiplier
+            targetNode.zRotation += CGFloat(dt) * realSpeed * direction
         }
     }
     
@@ -372,10 +373,6 @@ extension Scene: GameDelegate {
      Respond to a new game being started
      */
     public func gameDidStart() {
-        // load the pattern for the first stage
-        let pattern = TargetNodeCreator.patternForStage(game.stage)
-        loadPattern(pattern)
-        
         rotationDirection = .CounterClockwise
         isGameRunning = true
     }
@@ -401,17 +398,18 @@ extension Scene: GameDelegate {
     /**
      Respond to the game advancing to the next stage
      */
-    public func gameDidProceedToStage(stage: Int) {
+    public func gameDidProceedToStage(stage: Int, withPattern pattern: TargetPattern) {
         // check if the collision line node is needed this round
-        if stage % 2 == 1 { // TODO: should be anchored in the game logic directly
+        if game.stageStyle == .Bonus {
             collisionLineNode.removeFromParent()
         } else {
+            collisionLineNode.removeFromParent()
             objectsNode.addChild(collisionLineNode)
         }
-        borderNode.toggleTransformation()
+        
+        borderNode.setStyle(game.stageStyle)
         
         // load pattern for next stage
-        let pattern = TargetNodeCreator.patternForStage(stage)
         loadPattern(pattern)
     }
     
@@ -464,6 +462,11 @@ extension Scene: SKPhysicsContactDelegate {
                 // tell the game to increase the scire
                 game.increaseScore()
                 
+                // update playing UI
+                if game.stageStyle == .Normal {
+                    playingNode?.progressIndicator.advanceProgress()
+                }
+                
                 // get & remove target node
                 let targetBody: SKPhysicsBody = contact.bodyA.categoryBitMask == EntityType.Target.rawValue ? contact.bodyA : contact.bodyB
                 let targetNode = targetBody.node as? TargetNode
@@ -474,6 +477,11 @@ extension Scene: SKPhysicsContactDelegate {
                 
                 // if no target nodes are left, the current stage was cleared -> advance to next one
                 if currentPatternNodes.count == 0 {
+                    // update playing UI if needed
+                    if game.stageStyle == .Bonus {
+                        playingNode?.progressIndicator.resetProgress()
+                    }
+                    
                     game.nextStage()
                 }
             }
@@ -482,7 +490,6 @@ extension Scene: SKPhysicsContactDelegate {
             // - flip rotation direction
             // - reset collision line node
         else if isMarkerCollision {
-            print("marker")
             let markerBody: SKPhysicsBody = contact.bodyA.categoryBitMask == EntityType.CollisionMarker.rawValue ? contact.bodyA : contact.bodyB
             
             // had problems with the collision being called out multiple times, so I

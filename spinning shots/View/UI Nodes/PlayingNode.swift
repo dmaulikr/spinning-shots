@@ -15,6 +15,7 @@ public class PlayingNode: SKNode {
     private var sceneDelegate: SceneTransitionDelegate  // delegate used to inform the scene about transitions
     
     private var scoreLabel: LabelNode!                  // label displaying the current score
+    private(set) public var  progressIndicator: ProgressIndicatorNode! // showing the game stage progress
     
     private var isTransitionRunning = false             // indicates whether the closing transition is
     
@@ -50,11 +51,20 @@ public class PlayingNode: SKNode {
         scoreLabel.setScale(0.0)
         addChild(scoreLabel)
         
+        progressIndicator = ProgressIndicatorNode(progressTarget: 5)
+        progressIndicator.name = "progressIndicator"
+        let progressIndicatorPosY = scoreLabel.frame.origin.y - sizes.PlayingScoreLabelSize / 2.0 - 8.0
+        progressIndicator.position = CGPoint(x: sizes.Screen.middle.x, y: progressIndicatorPosY)
+        progressIndicator.alpha = 0.0
+        progressIndicator.setScale(0.0)
+        addChild(progressIndicator)
+        
         // animate the elements in with a fade and scale action
         let fadeIn = SKAction.fadeInWithDuration(ActionDuration)
         let scaleup = SKAction.scaleTo(1.0, duration: ActionDuration)
         let fadeInAndScaleUp = SKAction.group([fadeIn, scaleup])
         scoreLabel.runAction(fadeInAndScaleUp)
+        progressIndicator.runAction(fadeInAndScaleUp)
     }
     
     /**
@@ -76,7 +86,8 @@ public class PlayingNode: SKNode {
         let fadeOut = SKAction.fadeOutWithDuration(ActionDuration)
         let fadeOutAndPop = SKAction.group([fadeOut, SKAction.popAction])
         let groupAction = SKAction.group([
-            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: scoreLabel.name!)
+            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: scoreLabel.name!),
+            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: progressIndicator.name!)
             ])
         
         // chain animations

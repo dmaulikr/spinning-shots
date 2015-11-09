@@ -48,6 +48,7 @@ public struct Sizes {
     public let GameOverButtonGameCenterDiameter: CGFloat
     
     public let PlayingScoreLabelSize: CGFloat
+    public let PlayingProgressIndicator: CGSize
     
     private init() {
         guard let window = (UIApplication.sharedApplication().delegate?.window ?? nil) else { fatalError("Application wasn't set up correctly (-> check AppDelegate)") }
@@ -72,6 +73,7 @@ public struct Sizes {
         MenuButtonPlayDiameter = PlayingAreaDiameter * 0.4
         
         PlayingScoreLabelSize = PlayingAreaDiameter * 0.2
+        PlayingProgressIndicator = CGSize(width: Screen.width, height: TargetThickness)
         
         GameOverButtonHomeDiameter = PlayingAreaDiameter * 0.25
         GameOverButtonShareDiameter = GameOverButtonHomeDiameter * 0.75

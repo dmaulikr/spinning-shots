@@ -15,55 +15,72 @@ import SpriteKit
  */
 public class BorderNode: SKSpriteNode {
     
-    private(set) public var isFullCircle: Bool
+    private(set) public var gameStageStyle: GameStageStyle  // the border adjusts its appearance to this value
+    private var borderArc: ArcNode!                         // full circle arc
+    private var overlay: SKSpriteNode!                      // overlay to change the border appearance
     
-    private var upperHalf: ArcNode!
-    private var lowerHalf: ArcNode!
+    private var isTransformationRunning: Bool
     
     /**
      Create a border node.
      */
-    public init(isFullCircle: Bool) {
-        self.isFullCircle = isFullCircle
-        
+    public init(gameStageStyle: GameStageStyle) {
         let sizes = Values.sharedValues.sizes
+        
+        self.gameStageStyle = gameStageStyle
+        self.isTransformationRunning = false
         
         super.init(texture: nil, color: Colors.Background, size: CGSize(diameter: sizes.BorderDiameter))
         
         let thickness = sizes.BorderStrokeWidth
-        upperHalf = createArcNode(thickness: thickness)
-        lowerHalf = createArcNode(thickness: thickness, rotated: true)
+        borderArc = ArcNode(rotation: 0.0, degrees: 360.0, thickness: thickness, inRectWithDiameter: size.width)
         
-        addChild(upperHalf)
-        addChild(lowerHalf)
+        // The change in appearance is done with an overlay, which is moved
+        // depending on the gameStageStyle
+        let overlayPosX = gameStageStyle == .Bonus ? -sizes.BorderDiameter : 0.0
+        overlay = SKSpriteNode(color: Colors.Background, size: CGSize(diameter: sizes.BorderDiameter))
+        overlay.position = CGPoint(x: overlayPosX, y: -sizes.BorderDiameter / 2.0)
+        
+        addChild(borderArc)
+        addChild(overlay)
         
         zPosition = ZPositions.OvalBorder
     }
     
-    private func createArcNode(thickness thickness: CGFloat, rotated: Bool = false) -> ArcNode {
-        let rotation: CGFloat = 90.0 + (rotated ? 180 : 0.0 )
-        let degrees: CGFloat = 180.0
+    /**
+     Toggle the border appearance depending on the current GameStageStyle
+     In case of
+        - Normal: only the upper half of the circle is visible
+        - Bonus: full circle is visible
+     
+     - parameter animated: whether the toggle should animated
+     */
+    private func toggleAppearance(animated animated: Bool = true) {
+        guard !isTransformationRunning else { return }
+        isTransformationRunning = true
         
-        let arcNode = ArcNode(rotation: rotation, degrees: degrees, thickness: thickness, inRectWithDiameter: size.width)
+        gameStageStyle = gameStageStyle == .Normal ? .Bonus : .Normal
         
-        return arcNode
+        let duration = animated ? ActionDuration : 0.0
+        overlay.runAction(SKAction.moveByX(size.width, y: 0.0, duration: duration)) {
+            self.isTransformationRunning = false
+            
+            if self.gameStageStyle == .Bonus {
+                self.overlay.position.x = -self.size.width
+            }
+        }
     }
     
-    public func toggleTransformation(animated animated: Bool = true) {
-        isFullCircle = !isFullCircle
-        
-        if isFullCircle {
-            addChild(lowerHalf)
-        }
-        
-        if animated {
-            lowerHalf.runAction(SKAction.rotateByAngle(CGFloat(M_PI), duration: ActionDuration)) {
-                if !self.isFullCircle {
-                    self.lowerHalf.removeFromParent()
-                }
-            }
-        } else if !isFullCircle {
-            lowerHalf.removeFromParent()
+    /**
+     Set the GameStageStyle of the border node.
+        - Normal: only the upper half of the circle is visible
+        - Bonus: full circle is visible
+     - parameter animated: whether the style change should be animated
+     */
+    public func setStyle(style: GameStageStyle, animated: Bool = true) {
+        // only need to set the style if it's different from the current one
+        if gameStageStyle != style {
+            toggleAppearance(animated: animated)
         }
     }
     

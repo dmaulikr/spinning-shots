@@ -42,6 +42,8 @@
 		B6809AF81BED4FCE0061C0C0 /* spinning_shots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6809AF71BED4FCE0061C0C0 /* spinning_shots_UITests.swift */; };
 		B6809B001BED4FE20061C0C0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6809AFF1BED4FE20061C0C0 /* SnapshotHelper.swift */; };
 		B6BED82A1BEAA2EB002BF57A /* ArcNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BED8291BEAA2EB002BF57A /* ArcNode.swift */; };
+		B6CC987B1BEE7F24007831D9 /* TargetPatternCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC987A1BEE7F24007831D9 /* TargetPatternCreator.swift */; };
+		B6CC987D1BEEC0A4007831D9 /* ProgressIndicatorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC987C1BEEC0A4007831D9 /* ProgressIndicatorNode.swift */; };
 		B6D3527F1BC42BD800498C8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6D3527D1BC42BD800498C8E /* Main.storyboard */; };
 		B6D352811BC42BD800498C8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6D352801BC42BD800498C8E /* Assets.xcassets */; };
 		B6D352841BC42BD800498C8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6D352821BC42BD800498C8E /* LaunchScreen.storyboard */; };
@@ -95,6 +97,8 @@
 		B6809AF91BED4FCE0061C0C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6809AFF1BED4FE20061C0C0 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		B6BED8291BEAA2EB002BF57A /* ArcNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcNode.swift; sourceTree = "<group>"; };
+		B6CC987A1BEE7F24007831D9 /* TargetPatternCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TargetPatternCreator.swift; path = API/TargetPatternCreator.swift; sourceTree = "<group>"; };
+		B6CC987C1BEEC0A4007831D9 /* ProgressIndicatorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressIndicatorNode.swift; path = "View/UI Objects/ProgressIndicatorNode.swift"; sourceTree = "<group>"; };
 		B6D352721BC42BD700498C8E /* spinning shots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "spinning shots.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6D3527E1BC42BD800498C8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B6D352801BC42BD800498C8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 				B609BC161BE939B400C12CAA /* LabelNode.swift */,
 				B609BC171BE939B400C12CAA /* LineNode.swift */,
 				B609BC181BE939B400C12CAA /* BorderNode.swift */,
+				B6CC987C1BEEC0A4007831D9 /* ProgressIndicatorNode.swift */,
 			);
 			name = "UI Objects";
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 				B609BC221BE939C100C12CAA /* Settings.swift */,
 				B609BC231BE939C100C12CAA /* SoundManager.swift */,
 				B609BC241BE939C100C12CAA /* TargetNodeCreator.swift */,
+				B6CC987A1BEE7F24007831D9 /* TargetPatternCreator.swift */,
 				B609BC251BE939C100C12CAA /* Textures.swift */,
 				B609BC261BE939C100C12CAA /* Values.swift */,
 				B609BC271BE939C100C12CAA /* ZPositions.swift */,
@@ -387,11 +393,13 @@
 				B609BC111BE939A800C12CAA /* GameOverNode.swift in Sources */,
 				B609BC2B1BE939C100C12CAA /* GameCenterManager.swift in Sources */,
 				B6BED82A1BEAA2EB002BF57A /* ArcNode.swift in Sources */,
+				B6CC987D1BEEC0A4007831D9 /* ProgressIndicatorNode.swift in Sources */,
 				B609BC281BE939C100C12CAA /* Colors.swift in Sources */,
 				B609BC121BE939A800C12CAA /* MenuNode.swift in Sources */,
 				B609BC021BE9397E00C12CAA /* Target.swift in Sources */,
 				B609BC301BE939C100C12CAA /* Values.swift in Sources */,
 				B609BC2E1BE939C100C12CAA /* TargetNodeCreator.swift in Sources */,
+				B6CC987B1BEE7F24007831D9 /* TargetPatternCreator.swift in Sources */,
 				B609BC0B1BE9399C00C12CAA /* BulletNode.swift in Sources */,
 				B609BC071BE9398C00C12CAA /* StyleKit+Images.swift in Sources */,
 				B609BBF41BE9396600C12CAA /* Game.swift in Sources */,
@@ -603,6 +611,7 @@
 				B6809AFD1BED4FCE0061C0C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B6D3526D1BC42BD700498C8E /* Build configuration list for PBXProject "spinning shots" */ = {
 			isa = XCConfigurationList;

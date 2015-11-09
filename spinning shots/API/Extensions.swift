@@ -15,7 +15,7 @@ extension CGFloat {
      - parameter firstNum: beginning of range
      - parameter secondNum: end of range
      */
-    static func randomBetween(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat{
+    static func randomBetween(firstNum: CGFloat, and secondNum: CGFloat) -> CGFloat{
         return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + fmin(firstNum, secondNum)
     }
 }
