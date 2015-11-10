@@ -40,6 +40,8 @@ public class ProgressIndicatorNode: SKSpriteNode {
             addChild(node)
             progressNodes.append(node)
         }
+        
+        zPosition = ZPositions.UINode
     }
     
     /**
