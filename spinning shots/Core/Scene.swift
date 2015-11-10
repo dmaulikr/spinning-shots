@@ -53,7 +53,6 @@ public class Scene: SKScene {
     private var dt: NSTimeInterval = 0.0                // indicates the time delta between now and the last update
     
     private var backgroundNode: BackgroundNode!         // background of the scene
-    private var borderNode: BorderNode!             // border of the playing area
     private var collisionLineNode: LineNode!                     // invisible, used for collision detection
     
     private var rotationNode: SKNode!                   // holds all game objects that should rotate
@@ -153,15 +152,12 @@ public class Scene: SKScene {
         setupCannonNode()
         setupBulletNode()
         
-        setupBorderNode()
-        
         // Initial game object animations:
         // - fade in & scale up cannon
         // - move bullet up to make it stick out of the cannon a bit
         let cannonAction = SKAction.fadeInAndScaleUp(ActionDuration)
         let bulletAction = SKAction.moveTo(positions.CannonBullet, duration: ActionDuration / 3.0)
         
-        borderNode.runAction(SKAction.fadeAlphaTo(1.0, duration: ActionDuration))
         cannonNode.runAction(cannonAction) {
             self.objectsNode.addChild(self.bulletNode)
             self.bulletNode.runAction(bulletAction)
@@ -196,16 +192,6 @@ public class Scene: SKScene {
     private func setupBulletNode() {
         bulletNode = BulletNode()
         bulletNode.position = positions.Cannon
-    }
-    
-    /**
-     Create the border node and add it to the objects node.
-     */
-    private func setupBorderNode() {
-        borderNode = BorderNode(gameStageStyle: game.stageStyle)
-        borderNode.alpha = 0.0
-        borderNode.position = positions.ScreenMiddle
-        objectsNode.addChild(borderNode)
     }
     
     /**
@@ -319,7 +305,8 @@ public class Scene: SKScene {
         // - playing: shoot bullet
         switch sceneState as SceneState {
         case .Menu: menuNode?.touchesBegan(touches, withEvent: event)
-        case .Playing: if isGameRunning { shootBullet() }
+        case .Playing:
+            if isGameRunning { shootBullet() }
         case .GameOver: gameOverNode?.touchesBegan(touches, withEvent: event)
         }
     }
@@ -407,7 +394,7 @@ extension Scene: GameDelegate {
             objectsNode.addChild(collisionLineNode)
         }
         
-        borderNode.setStyle(game.stageStyle)
+        playingNode?.updatePlayingBackground(forStyle: game.stageStyle)
         
         // load pattern for next stage
         loadPattern(pattern)

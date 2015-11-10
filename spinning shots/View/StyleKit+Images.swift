@@ -20,6 +20,16 @@ extension StyleKit {
         return imageOfBorder
     }
     
+    public class func imageOfCircleMask(diameter diameter: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(diameter: diameter), false, 0)
+        drawCircleMask(frame: CGRect(x: 0.0, y: 0.0, width: diameter, height: diameter))
+        
+        let imageOfCircleMask = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return imageOfCircleMask
+    }
+    
     public class func imageOfCannon(size size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         drawCannon(frame: CGRectMake(0, 0, size.width, size.height), cannonColor: Colors.Cannon, cannonStrokeColor: Colors.Stroke)
@@ -79,5 +89,27 @@ extension StyleKit {
         
         return imageOfGameCenterButton
     }
+    
+    public class func imageOfOuterBackgroundMask() -> UIImage {
+        let size = Values.sharedValues.sizes.Screen
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        Colors.Background.setFill()
+        let diameter = Values.sharedValues.sizes.PlayingAreaDiameter
+        let posX = (size.width - diameter) / 2.0
+        let posY = (size.height - diameter) / 2.0
+        let rect = CGRect(x: posX, y: posY, width: diameter, height: diameter)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: diameter / 2.0)
+        path.appendPath(UIBezierPath(rect: CGRect(origin: .zero, size: size)))
+        path.usesEvenOddFillRule = true
+        path.fill()
+    
+        let imageOfMask = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return imageOfMask
+    
+    }
+    
     
 }

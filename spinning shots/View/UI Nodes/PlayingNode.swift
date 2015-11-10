@@ -14,6 +14,7 @@ import SpriteKit
 public class PlayingNode: SKNode {
     private var sceneDelegate: SceneTransitionDelegate  // delegate used to inform the scene about transitions
     
+    private var backgroundNode: PlaingBackgroundNode!   // indicating the playing area & stage style
     private var scoreLabel: LabelNode!                  // label displaying the current score
     private(set) public var  progressIndicator: ProgressIndicatorNode! // showing the game stage progress
     
@@ -41,6 +42,11 @@ public class PlayingNode: SKNode {
      */
     private func setupUI() {
         // Add the UI elements
+        backgroundNode = PlaingBackgroundNode(gameStageStyle: .Normal)
+        backgroundNode.name = "backgroundNode"
+        backgroundNode.alpha = 0.0
+        addChild(backgroundNode)
+        
         scoreLabel = LabelNode(text: "0", fontSize: sizes.PlayingScoreLabelSize)
         scoreLabel.name = "scoreLabel"
         let scoreLabelPosY = sizes.Screen.height - scoreLabel.frame.height / 2.0 - 32.0
@@ -65,6 +71,15 @@ public class PlayingNode: SKNode {
         let fadeInAndScaleUp = SKAction.group([fadeIn, scaleup])
         scoreLabel.runAction(fadeInAndScaleUp)
         progressIndicator.runAction(fadeInAndScaleUp)
+        backgroundNode.runAction(fadeIn)
+    }
+    
+    /**
+     Update the playing-background to match the game's stage style.
+     - parameter style: stage style
+     */
+    public func updatePlayingBackground(forStyle style: GameStageStyle) {
+        backgroundNode.setStyle(style)
     }
     
     /**
@@ -86,8 +101,9 @@ public class PlayingNode: SKNode {
         let fadeOut = SKAction.fadeOutWithDuration(ActionDuration)
         let fadeOutAndPop = SKAction.group([fadeOut, SKAction.popAction])
         let groupAction = SKAction.group([
-            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: scoreLabel.name!),
-            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: progressIndicator.name!)
+            SKAction.runAction(fadeOutAndPop, onChildWithName: scoreLabel.name!),
+            SKAction.runAction(fadeOutAndPop, onChildWithName: progressIndicator.name!),
+            SKAction.runAction(fadeOut, onChildWithName: backgroundNode.name!)
             ])
         
         // chain animations
