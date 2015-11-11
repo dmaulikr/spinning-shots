@@ -277,6 +277,7 @@ public class Scene: SKScene {
         // remove bullet if it reaches the playing area's bounds without touching a target
         if bulletNode.position.y > positions.ScreenMiddle.y + sizes.PlayingAreaDiameter / 2.0 - bulletNode.size.height / 2.0 {
             bulletNode.removeFromParent()
+            SoundManager.sharedManager.vibrate()
             
             // end the game if the player hasn't anymore bullets
             if game.bullets == 0 {
