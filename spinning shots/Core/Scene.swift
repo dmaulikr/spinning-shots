@@ -252,11 +252,10 @@ public class Scene: SKScene {
         }
         lastUpdateTime = currentTime
         
-        // target nodes can be rotating even if the game isn't in playing state
-        rotateTargetNodes()
-        
         // check if game is running, only continue when it is
         guard isGameRunning else { return }
+        
+        rotateTargetNodes()
         
         // perform game tick
         game.tick(dt)
