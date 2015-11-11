@@ -352,6 +352,32 @@ public class Scene: SKScene {
         //GameCenterManager.sharedManager.reportScore(score) // TODO: uncomment for prod
         Settings.sharedManager.setBestScore(score)
     }
+    
+    /**
+     Makes the whole screen wiggle.
+     */
+    private func performWiggleAnimation() {
+        let wiggleCount = 3
+        let wiggleStepDuration = ActionDuration / Double(wiggleCount)
+        let wiggleStepFragmentDuration = wiggleStepDuration / 3.0
+        
+        var wiggleActionSteps = [SKAction]()
+        for _ in 0..<wiggleCount {
+            let wiggleAmountX = CGFloat.randomBetween(10, and: 20)
+            let wiggleAmountY = CGFloat.randomBetween(10, and: 20)
+            
+            let wiggleRightAction = SKAction.moveByX(wiggleAmountX, y: wiggleAmountY, duration: wiggleStepFragmentDuration)
+            let wiggleLeftAction = SKAction.moveByX(-wiggleAmountX * 2.0, y: -wiggleAmountY * 2.0, duration: wiggleStepFragmentDuration)
+            
+            let wiggle = SKAction.sequence([wiggleRightAction, wiggleLeftAction, wiggleRightAction])
+            
+            wiggleActionSteps.append(wiggle)
+        }
+        
+        let sequence = SKAction.sequence(wiggleActionSteps)
+        objectsNode.runAction(sequence)
+        playingNode?.runAction(sequence)
+    }
 }
 
 //MARK: - GameDelegate
@@ -369,17 +395,24 @@ extension Scene: GameDelegate {
      */
     public func gameDidEnd(score: Int) {
         isGameRunning = false
-        
-        // remove entities etc from ui
-        objectsNode.removeAllChildren()
-        rotationNode.removeAllChildren()
-        
-        // add empty node again
-        objectsNode.addChild(rotationNode)
-        
         saveScore(score)
         
-        playingNode?.close(withTargetState: .GameOver)
+        // run the closing animation chain, it's a bit messy and spread around many places, urgh :(
+        // [1] make the screen wiggle (performed right below)
+        // [2] pop the cannon (performed right below)
+        // [3] fade out the target on the rotationnode (performed right below)
+        // [4] pop/fade out score label/progress indicator (performed in the playingNode)
+        // [5] fade out the playingBackgroundNode (called in the playingNode, performed in the playingBackgroundNode)
+        
+        performWiggleAnimation()                                    // [1]
+        cannonNode.runAction(SKAction.popAction)                    // [2]
+
+        let fadeOut = SKAction.fadeOutWithDuration(ActionDuration)
+        for node in rotationNode.children {
+            node.runAction(fadeOut)                                 // [3]
+        }
+        
+        playingNode?.close(withTargetState: .GameOver)              // call to [4] & [5]
     }
     
     /**
@@ -555,6 +588,9 @@ extension Scene: SceneTransitionDelegate {
             menuNode?.removeFromParent()
             menuNode = nil
         case .Playing:
+            objectsNode.removeAllChildren()
+            rotationNode.removeAllChildren()
+            objectsNode.addChild(rotationNode)
             playingNode?.removeFromParent()
             playingNode = nil
         case .GameOver:

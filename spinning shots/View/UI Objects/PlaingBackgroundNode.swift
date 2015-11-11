@@ -16,7 +16,10 @@ import SpriteKit
 public class PlaingBackgroundNode: SKNode {
     
     private(set) public var gameStageStyle: GameStageStyle  // the border adjusts its appearance to this value
-    private var overlayNode: SKCropNode!                    // overlay to change the border appearance
+    private(set) public var circleNode: SKShapeNode!         // overlay to change the border appearance
+    private(set) public var overlayNode: SKCropNode!        // overlay to change the border appearance
+    private(set) public var borderNode: SKSpriteNode!         // overlay to change the border appearance
+    private(set) public var circleStrokeNode: ArcNode!   // overlay to change the border appearance
     
     private var isTransformationRunning: Bool
     
@@ -42,7 +45,8 @@ public class PlaingBackgroundNode: SKNode {
         super.init()
 
         // circle in the middle
-        let circleNode = SKShapeNode(circleOfRadius: sizes.BorderDiameter / 2.0)
+        circleNode = SKShapeNode(circleOfRadius: sizes.BorderDiameter / 2.0)
+        circleNode.name = "circleNode"
         circleNode.position = positions.ScreenMiddle
         circleNode.fillColor = Colors.Cannon
 
@@ -50,17 +54,20 @@ public class PlaingBackgroundNode: SKNode {
         let overlayRect = SKSpriteNode(color: Colors.Target, size: CGSize(diameter: sizes.BorderDiameter))
         let overlayMask =  SKSpriteNode(texture: SKTexture(image: StyleKit.imageOfCircleMask(diameter: sizes.BorderDiameter)))
         overlayNode = SKCropNode()
+        overlayNode.name = "overlayNode"
         overlayNode.addChild(overlayRect)
         overlayNode.maskNode = overlayMask
         let overlayPosX = positions.ScreenMiddle.x - (gameStageStyle == .Bonus ? sizes.BorderDiameter : 0.0)
         overlayNode.position = CGPoint(x: overlayPosX, y: positions.ScreenMiddle.y)
         
         // background around the circle
-        let borderNode = SKSpriteNode(texture: SKTexture(image: StyleKit.imageOfOuterBackgroundMask()))
+        borderNode = SKSpriteNode(texture: SKTexture(image: StyleKit.imageOfOuterBackgroundMask()))
+        borderNode.name = "borderNode"
         borderNode.position = positions.ScreenMiddle
         
         // stroked circle
-        let circleStrokeNode = ArcNode(rotation: 0.0, degrees: 360.0, thickness: sizes.BorderStrokeWidth, inRectWithDiameter: sizes.BorderDiameter)
+        circleStrokeNode = ArcNode(rotation: 0.0, degrees: 360.0, thickness: sizes.BorderStrokeWidth, inRectWithDiameter: sizes.BorderDiameter)
+        circleStrokeNode.name = "circleStrokeNode"
         circleStrokeNode.position = positions.ScreenMiddle
         
         // it's important to set the right zPositions to each node
@@ -69,7 +76,7 @@ public class PlaingBackgroundNode: SKNode {
         borderNode.zPosition = ZPositions.BorderOuterMask
         circleStrokeNode.zPosition = ZPositions.BorderStroke
 
-//        addChild(circleNode)
+        addChild(circleNode)
         addChild(overlayNode)
         addChild(borderNode)
         addChild(circleStrokeNode)
@@ -111,6 +118,39 @@ public class PlaingBackgroundNode: SKNode {
         if gameStageStyle != style {
             toggleAppearance(animated: animated)
         }
+    }
+    
+    /**
+     Prepare the node for being animated in. This method should be called
+     before the node gets added to the scene.
+     */
+    public func prepareForAnimateIn() {
+        circleNode.alpha = 0.0
+        overlayNode.maskNode?.alpha = 0.0
+        circleStrokeNode.alpha = 0.0
+    }
+    
+    /**
+     Fade the node in.
+     */
+    public func fadeIn() {
+        let fadeIn = SKAction.fadeInWithDuration(ActionDuration)
+        circleNode.runAction(fadeIn)
+        overlayNode.maskNode?.runAction(fadeIn)
+        circleStrokeNode.runAction(fadeIn)
+    }
+    
+    /**
+     Fade the node out.
+     */
+    public func fadeOut() {
+        let fadeOut = SKAction.fadeOutWithDuration(ActionDuration)
+        let group = SKAction.runBlock {
+            self.circleNode.runAction(fadeOut)
+            self.overlayNode.maskNode?.runAction(fadeOut)
+            self.circleStrokeNode.runAction(fadeOut)
+        }
+        runAction(group)
     }
     
     public required init?(coder aDecoder: NSCoder) {

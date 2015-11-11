@@ -44,7 +44,7 @@ public class PlayingNode: SKNode {
         // Add the UI elements
         backgroundNode = PlaingBackgroundNode(gameStageStyle: .Normal)
         backgroundNode.name = "backgroundNode"
-        backgroundNode.alpha = 0.0
+        backgroundNode.prepareForAnimateIn()
         addChild(backgroundNode)
         
         scoreLabel = LabelNode(text: "0", fontSize: sizes.PlayingScoreLabelSize)
@@ -71,7 +71,8 @@ public class PlayingNode: SKNode {
         let fadeInAndScaleUp = SKAction.group([fadeIn, scaleup])
         scoreLabel.runAction(fadeInAndScaleUp)
         progressIndicator.runAction(fadeInAndScaleUp)
-        backgroundNode.runAction(fadeIn)
+        
+        backgroundNode.fadeIn()
     }
     
     /**
@@ -102,14 +103,14 @@ public class PlayingNode: SKNode {
         let fadeOutAndPop = SKAction.group([fadeOut, SKAction.popAction])
         let groupAction = SKAction.group([
             SKAction.runAction(fadeOutAndPop, onChildWithName: scoreLabel.name!),
-            SKAction.runAction(fadeOutAndPop, onChildWithName: progressIndicator.name!),
-            SKAction.runAction(fadeOut, onChildWithName: backgroundNode.name!)
+            SKAction.runAction(fadeOut, onChildWithName: progressIndicator.name!)
             ])
         
         // chain animations
         let sequenceAction = SKAction.sequence([
-            SKAction.waitForDuration(ActionDuration),
-            groupAction
+            SKAction.waitForDuration(ActionDuration), // wait for the wiggle animation to finish (performed in the scene)
+            groupAction,
+            SKAction.runBlock { self.backgroundNode.fadeOut() }
             ])
         
         // start transition with animations
