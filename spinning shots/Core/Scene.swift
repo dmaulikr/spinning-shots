@@ -246,11 +246,11 @@ public class Scene: SKScene {
     public override func update(currentTime: NSTimeInterval) {
         super.update(currentTime)
         
-        // calculate time delta since last update, limit to 30fps
-        // TODO: fix calculation, upgrade to 60fps
-        dt =  lastUpdateTime > 0 ? currentTime - lastUpdateTime : 0.0
-        if dt > 1.0/30.0 {
-            dt = 1.0/30.0
+        // calculate time delta since last update
+        if lastUpdateTime > 0 {
+            dt = currentTime - lastUpdateTime
+        } else {
+            dt = 0
         }
         lastUpdateTime = currentTime
         
