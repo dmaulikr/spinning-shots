@@ -21,6 +21,9 @@ public class PlaingBackgroundNode: SKNode {
     private(set) public var borderNode: SKSpriteNode!         // overlay to change the border appearance
     private(set) public var circleStrokeNode: ArcNode!   // overlay to change the border appearance
     
+    private var overlayPositionsForStageStyle = [GameStageStyle : CGFloat]()
+    private var overlayMoveXLength: CGFloat = 0.0
+    
     private var isTransformationRunning: Bool
     
     /**
@@ -43,6 +46,10 @@ public class PlaingBackgroundNode: SKNode {
         self.isTransformationRunning = false
         
         super.init()
+        
+        overlayPositionsForStageStyle[.Normal] = positions.ScreenMiddle.x
+        overlayPositionsForStageStyle[.Bonus] = positions.ScreenMiddle.x - sizes.Screen.width
+        overlayMoveXLength = sizes.Screen.width
 
         // circle in the middle
         circleNode = SKShapeNode(circleOfRadius: sizes.BorderDiameter / 2.0)
@@ -57,7 +64,7 @@ public class PlaingBackgroundNode: SKNode {
         overlayNode.name = "overlayNode"
         overlayNode.addChild(overlayRect)
         overlayNode.maskNode = overlayMask
-        let overlayPosX = positions.ScreenMiddle.x - (gameStageStyle == .Bonus ? sizes.BorderDiameter : 0.0)
+        let overlayPosX = overlayPositionsForStageStyle[gameStageStyle]!
         overlayNode.position = CGPoint(x: overlayPosX, y: positions.ScreenMiddle.y)
         
         // background around the circle
@@ -98,11 +105,11 @@ public class PlaingBackgroundNode: SKNode {
         let overlayWidth = overlayNode.maskNode!.frame.width
         
         let duration = animated ? ActionDuration : 0.0
-        overlayNode.runAction(SKAction.moveByX(overlayWidth, y: 0.0, duration: duration)) {
+        overlayNode.runAction(SKAction.moveByX(overlayMoveXLength, y: 0.0, duration: duration)) {
             self.isTransformationRunning = false
             
             if self.gameStageStyle == .Bonus {
-                self.overlayNode.position.x = self.overlayNode.position.x - 2 * overlayWidth
+                self.overlayNode.position.x = self.overlayNode.position.x - 2 * self.overlayMoveXLength
             }
         }
     }
