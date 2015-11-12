@@ -40,7 +40,7 @@ public class SoundManager {
     private init() {
         // NOTE:    Do not uncomment yet, because the sounds are not yet added to the project.
         //          App will crash when trying to load them ;)
-        //initSounds() // TODO: uncomment for prod
+        //initSounds()
     }
     
     /**

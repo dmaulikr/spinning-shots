@@ -102,7 +102,6 @@ public class PlaingBackgroundNode: SKNode {
         isTransformationRunning = true
         
         gameStageStyle = gameStageStyle == .Normal ? .Bonus : .Normal
-        let overlayWidth = overlayNode.maskNode!.frame.width
         
         let duration = animated ? ActionDuration : 0.0
         overlayNode.runAction(SKAction.moveByX(overlayMoveXLength, y: 0.0, duration: duration)) {
