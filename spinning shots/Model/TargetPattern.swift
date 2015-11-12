@@ -87,7 +87,6 @@ public class TargetPattern {
         for i in 0..<count {
             let targetSizeForRandomCaluclation = (targetSize + 2.0) / 2.0
             let randomRotationOffset = shouldUseRandomOffset ? CGFloat.randomBetween(targetSizeForRandomCaluclation, and: 180.0 - targetSizeForRandomCaluclation) : 0.0
-            print("\(randomRotationOffset)")
             let target = Target(degrees: targetSize, rotation: randomRotationOffset + targetSize * CGFloat(i) + gap * CGFloat(i))
             targets.append(target)
         }
