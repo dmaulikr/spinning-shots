@@ -50,12 +50,16 @@ public struct Sizes {
     public let PlayingScoreLabelSize: CGFloat
     public let PlayingProgressIndicator: CGSize
     
+    private let DeviceIsiPad: Bool
+    
     private init() {
         guard let window = (UIApplication.sharedApplication().delegate?.window ?? nil) else { fatalError("Application wasn't set up correctly (-> check AppDelegate)") }
         
+        DeviceIsiPad = UIDevice.currentDevice().userInterfaceIdiom == .Pad
+        
         Screen = window.bounds.size
         
-        PlayingAreaDiameter = Screen.width * 0.9
+        PlayingAreaDiameter = 310.0 * (DeviceIsiPad ? 2.0 : 1.0)
         BorderDiameter = PlayingAreaDiameter
         BorderStrokeWidth = 3.0
         
@@ -118,6 +122,6 @@ public struct Speeds {
     
     private init(sizes: Sizes) {
         Bullet = sizes.PlayingAreaDiameter * 1.5
-        Target = sizes.PlayingAreaDiameter * 0.0075
+        Target = sizes.PlayingAreaDiameter * 0.0075  / (sizes.DeviceIsiPad ? 2.0 : 1.0)
     }
 }

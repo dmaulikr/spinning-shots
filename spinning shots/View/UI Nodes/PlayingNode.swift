@@ -59,7 +59,7 @@ public class PlayingNode: SKNode {
         
         progressIndicator = ProgressIndicatorNode(progressTarget: 5)
         progressIndicator.name = "progressIndicator"
-        let progressIndicatorPosY = scoreLabel.frame.origin.y - sizes.PlayingScoreLabelSize / 2.0 - 8.0
+        let progressIndicatorPosY = sizes.Screen.height <= 500.00 ? sizes.PlayingScoreLabelSize / 2.0 - 8.0 : scoreLabel.frame.origin.y - sizes.PlayingScoreLabelSize / 2.0 - 8.0
         progressIndicator.position = CGPoint(x: sizes.Screen.middle.x, y: progressIndicatorPosY)
         progressIndicator.alpha = 0.0
         progressIndicator.setScale(0.0)
