@@ -351,7 +351,7 @@ public class Scene: SKScene {
         // the score only needs to be saved if it is higher then the currently saved best score
         guard score > Settings.sharedManager.bestScore else { return }
         
-        //GameCenterManager.sharedManager.reportScore(score) // TODO: uncomment for prod
+        GameCenterManager.sharedManager.reportScore(score)
         Settings.sharedManager.setBestScore(score)
     }
     

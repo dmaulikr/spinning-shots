@@ -16,7 +16,7 @@ public class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     
     private var presentingViewController: UIViewController?     // UIViewController on which the GC-VC is presented
     
-    private let GameCenterScoreLeaderboardIdentifier = "spinning-shots_leaderboard_score"   // leaderboard identifier
+    private let GameCenterScoreLeaderboardIdentifier = "spinningshots_leaderboard_score"   // leaderboard identifier
     
     /**
         Assign the presenting view controller and authenticate the local player.

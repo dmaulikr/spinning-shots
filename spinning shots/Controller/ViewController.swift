@@ -27,8 +27,7 @@ class ViewController: UIViewController {
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)
         
-        // TODO: uncomment for prod
-        //GameCenterManager.sharedManager.setup(withPresentingViewController: self)
+        GameCenterManager.sharedManager.setup(withPresentingViewController: self)
         //SoundManager.sharedManager.setup(scene)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("shareScore:"), name: "ShareScore", object: nil)
