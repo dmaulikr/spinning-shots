@@ -15,9 +15,13 @@ public class MenuNode: SKNode {
     
     private var sceneDelegate: SceneTransitionDelegate      // delegate used to inform the scene about transitions
     
+    private var titleLabel: LabelNode!                      // label displaying the game title
     private var playButton: ButtonNode!                     // button for switching to the playing state
     
     private var isTransitionRunning = false                 // indicates whether the closing transition is running
+    
+    private let sizes = Values.sharedValues.sizes
+    private let positions = Values.sharedValues.positions
     
     /**
     Create a menu node.
@@ -38,7 +42,20 @@ public class MenuNode: SKNode {
      This method first creates the elements and then animates them in.
      */
     private func setupUI() {
+        let titleFontSize = sizes.Screen.height * 0.075
+
         // add the UI elements
+        titleLabel = LabelNode(text: "Spinning Shots", fontSize: titleFontSize)
+        titleLabel.name = "titleLabel"
+        titleLabel.fontColor = Colors.Target
+        let titleLabelPosY = sizes.Screen.height - titleLabel.frame.height / 2.0 - 32.0
+        titleLabel.position = CGPoint(x: sizes.Screen.middle.x, y: titleLabelPosY)
+        titleLabel.horizontalAlignmentMode = .Center
+        titleLabel.verticalAlignmentMode = .Center
+        titleLabel.alpha = 0.0
+        titleLabel.setScale(0.0)
+        addChild(titleLabel)
+        
         playButton = ButtonNode(item: .Play)
         playButton.name = "playButton"
         playButton.position = Values.sharedValues.sizes.Screen.middle
@@ -50,6 +67,7 @@ public class MenuNode: SKNode {
         let fadeIn = SKAction.fadeInWithDuration(ActionDuration)
         let scaleUp = SKAction.scaleTo(1.0, duration: ActionDuration)
         let fadeInAndScaleUp = SKAction.group([fadeIn, scaleUp])
+        titleLabel.runAction(SKAction.fadeInAndScaleUp(ActionDuration))
         playButton.runAction(fadeInAndScaleUp)
     }
     
@@ -64,7 +82,8 @@ public class MenuNode: SKNode {
         let fadeOut = SKAction.fadeOutWithDuration(ActionDuration)
         let fadeOutAndPop = SKAction.group([fadeOut, SKAction.popAction])
         let groupAction = SKAction.group([
-            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: playButton.name!)
+            SKAction.runAction(SKAction.group([fadeOutAndPop]), onChildWithName: playButton.name!),
+            SKAction.runAction(fadeOutAndPop, onChildWithName: titleLabel.name!)
             ])
         
         // chain animations
