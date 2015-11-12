@@ -34,7 +34,7 @@ public class TargetPatternCreator {
         let random = CGFloat.randomBetween(0.0, and: sizeRange)
         let targetSize = MIN_SIZE + random
         
-        return TargetPattern(targetCount: 1, targetSize: targetSize)
+        return TargetPattern(targetCount: 1, targetSize: targetSize, shouldUseRandomOffset: true)
     }
     
     /**
@@ -48,7 +48,7 @@ public class TargetPatternCreator {
         let targetSize = CGFloat.randomBetween(MIN_SIZE, and: MAX_SIZE)
         let targetCount = CGFloat.randomBetween(3, and: 8)
         
-        return TargetPattern(targetCount: Int(targetCount), targetSize: targetSize)
+        return TargetPattern(targetCount: Int(targetCount), targetSize: targetSize, shouldUseRandomOffset: false)
     }
     
 }

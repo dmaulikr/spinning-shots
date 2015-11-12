@@ -66,8 +66,9 @@ public class TargetPattern {
      specified amount of targets with the specified size.
      - parameter targetCount: amount of targets
      - parameter targetSize: size of targets
+     - parameter shouldUseRandomOffset: whether the rotation of the target nodes should be offset by a random number (used for the normal stage style)
      */
-    public init(targetCount: Int, targetSize: CGFloat) {
+    public init(targetCount: Int, targetSize: CGFloat, shouldUseRandomOffset: Bool) {
         self.targets = []
         self.targetSize = targetSize
         
@@ -76,15 +77,18 @@ public class TargetPattern {
         self.gap = remainingSize / CGFloat(targetCount)
         self.count = targetCount
         
-        createTargets()
+        createTargets(withRandomOffset: shouldUseRandomOffset)
     }
     
     /**
      Create targets using the previously calculated values. Should only be called by the classe's constructors.
      */
-    private func createTargets() {
+    private func createTargets(withRandomOffset shouldUseRandomOffset: Bool = false) {
         for i in 0..<count {
-            let target = Target(degrees: targetSize, rotation: 90 + targetSize * CGFloat(i) + gap * CGFloat(i))
+            let targetSizeForRandomCaluclation = (targetSize + 2.0) / 2.0
+            let randomRotationOffset = shouldUseRandomOffset ? CGFloat.randomBetween(targetSizeForRandomCaluclation, and: 180.0 - targetSizeForRandomCaluclation) : 0.0
+            print("\(randomRotationOffset)")
+            let target = Target(degrees: targetSize, rotation: randomRotationOffset + targetSize * CGFloat(i) + gap * CGFloat(i))
             targets.append(target)
         }
     }

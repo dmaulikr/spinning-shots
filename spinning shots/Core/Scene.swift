@@ -200,6 +200,8 @@ public class Scene: SKScene {
      - parameter pattern: The pattern to load
      */
     private func loadPattern(pattern: TargetPattern) {
+        rotationDirection = (Int(arc4random_uniform(UInt32(2)))) % 2 == 0 ? .Clockwise : .CounterClockwise
+        
         // clear out possible current nodes
         currentPatternNodes.removeAll()
         
@@ -429,8 +431,13 @@ extension Scene: GameDelegate {
         
         playingNode?.updatePlayingBackground(forStyle: game.stageStyle)
         
+        runAction(SKAction.sequence([
+            SKAction.waitForDuration(ActionDuration),
+            SKAction.runBlock {
+                self.loadPattern(pattern)
+            }
+            ]))
         // load pattern for next stage
-        loadPattern(pattern)
     }
     
     /**
