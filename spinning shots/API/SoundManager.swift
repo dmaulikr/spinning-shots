@@ -72,7 +72,7 @@ public class SoundManager {
      Vibrate the physical device.
      */
     public func vibrate() {
-        //AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
     
     /**
