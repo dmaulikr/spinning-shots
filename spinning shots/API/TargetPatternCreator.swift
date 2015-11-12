@@ -28,8 +28,8 @@ public class TargetPatternCreator {
      - returns: pattern of targets
      */
     private static func normalPattern() -> TargetPattern {
-        let MIN_SIZE: CGFloat = 10.0
-        let MAX_SIZE: CGFloat = 40.0
+        let MIN_SIZE: CGFloat = 12.0
+        let MAX_SIZE: CGFloat = 32.0
         let sizeRange = MAX_SIZE - MIN_SIZE
         let random = CGFloat.randomBetween(0.0, and: sizeRange)
         let targetSize = MIN_SIZE + random
