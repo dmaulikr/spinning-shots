@@ -521,7 +521,7 @@ extension Scene: SKPhysicsContactDelegate {
             
             // had problems with the collision being called out multiple times, so I
             // remove the physicsBody from it to prevent collision detection and add
-            // it back after a small delay. TODO: tweak / find better solution
+            // it back after a small delay.
             defer {
                 collisionLineNode.physicsBody = nil
             }
@@ -529,7 +529,7 @@ extension Scene: SKPhysicsContactDelegate {
             if collisionLineNode.physicsBody != nil {
                 rotationDirection.flip()
                 
-                let wait = SKAction.waitForDuration(0.2)
+                let wait = SKAction.waitForDuration(0.1)
                 let block = SKAction.runBlock {
                     self.collisionLineNode.physicsBody = markerBody
                 }
