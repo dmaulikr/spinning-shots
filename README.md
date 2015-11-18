@@ -8,8 +8,8 @@ The code in this repo was submitted as v1.0 to the App Store and is currently wa
 I'm already working on my next projects, so this game won't see any feature additions until next year at least (critical bugs will be fixed if there should be any after-launch).
 Feel free to open pull requests for features you would like to add! :)
 
-demo-gif:
-![spinning shots demo gif](https://media.giphy.com/media/26BkO9QLlPBIf9m36/giphy.gif)
+demo-gif:  
+![spinning shots demo gif](https://media.giphy.com/media/26BkO9QLlPBIf9m36/giphy.gif)  
 https://media.giphy.com/media/26BkO9QLlPBIf9m36/giphy.gif
   
     
