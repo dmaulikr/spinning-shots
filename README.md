@@ -10,7 +10,6 @@ Feel free to open pull requests for features you would like to add! :)
 
 demo-gif:  
 ![spinning shots demo gif](https://media.giphy.com/media/26BkO9QLlPBIf9m36/giphy.gif)  
-https://media.giphy.com/media/26BkO9QLlPBIf9m36/giphy.gif
   
     
 # Architecture
