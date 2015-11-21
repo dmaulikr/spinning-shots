@@ -4,7 +4,8 @@ The game is written in Swift, using the SpriteKit framework.
 
 The goal of the game is to shoot at spinning targets, miss a shot and the game is over.
 
-The code in this repo was submitted as v1.0 to the App Store and is currently waiting for review at Apple.
+Spinning Shots is also available for free on the App Store:   [Download](https://itunes.apple.com/us/app/spinning-shots/id1046883607?ls=1&mt=8)
+
 I'm already working on my next projects, so this game won't see any feature additions until next year at least (critical bugs will be fixed if there should be any after-launch).
 Feel free to open pull requests for features you would like to add! :)
 
